@@ -1122,9 +1122,9 @@ function moveSessionDate(nd){
   if(nd>today)nd=today;
   var ok=ui.date+'_'+ui.sess, nk=nd+'_'+ui.sess, l=state.log[ok];
   if(l){
-    if(state.log[nk]){
+    if(state.log[nk]&&state.log[nk].fin){
       var inp=$('#s-date');if(inp)inp.value=ui.date;
-      showMsg('dateMsg','Il existe déjà une séance '+ui.sess+' à cette date. Ouvre-la d\'abord ou choisis un autre jour.');
+      showMsg('dateMsg','Une séance '+ui.sess+' est déjà enregistrée à cette date. Choisis un autre jour.');
       return;
     }
     delete state.log[ok];
