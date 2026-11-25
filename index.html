@@ -178,6 +178,8 @@ textarea{min-height:76px;resize:vertical}
 .t4 label{display:flex;flex-direction:column;gap:3px;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
 .t4 input{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:6px;text-align:center;font:700 17px var(--f-display)}
 .t4 input.next{border-color:var(--accent)}
+.t4 input.hit{border-color:var(--ok)}
+.tgt{font-size:14px;font-weight:700;color:var(--accent)}
 .delta{font-size:13px;font-weight:700}
 .delta.good{color:var(--ok)} .delta.badv{color:var(--bad)}
 
@@ -407,9 +409,9 @@ var SCHIP={A:'A',B:'B',C:'C',L:'Cardio lundi',N:'Mini-mob. mercredi',M:'Mini-mob
 
 // Tests : v = valeur S0 (null = à faire), b = +1 plus haut = mieux, -1 plus bas = mieux
 var TESTS = [
- {id:'t_pi',cat:'Force',l:'Pompes inclinées max (note la hauteur d\'appui)',u:'répétitions',b:1,v:10},
- {id:'t_ps',cat:'Force',l:'Pompes strictes max (sur les pieds)',u:'répétitions',b:1,v:4},
- {id:'t_ch',cat:'Force',l:'Charge du squat sur une jambe vers une chaise : 8 répétitions propres par côté',u:'kg (haltère contre la poitrine, tempo 3-1-1-0)',b:1,v:null},
+ {id:'t_pi',cat:'Force',l:'Pompes inclinées (note la hauteur d\'appui)',u:'répétitions (plafond 20)',b:1,v:10},
+ {id:'t_ps',cat:'Force',l:'Pompes strictes (sur les pieds)',u:'répétitions (plafond 12)',b:1,v:4},
+ {id:'t_ch',cat:'Force',l:'Charge du squat sur une jambe vers une chaise : 8 répétitions propres par côté',u:'kg (haltère contre la poitrine, tempo 3-1-1-0, tu t\'arrêtes à 8 répétitions)',b:1,v:null},
  {id:'t_s1d',cat:'Force',l:'Squat sur une jambe vers une chaise, droite',u:'répétitions (plafond 20, note la hauteur de la chaise)',b:1,v:14},
  {id:'t_s1g',cat:'Force',l:'Squat sur une jambe vers une chaise, gauche',u:'répétitions (plafond 20, note la hauteur de la chaise)',b:1,v:14},
  {id:'t_hc',cat:'Force',l:'Tenue creuse (hollow body) : lombaires plaquées, jambes tendues',u:'secondes (plafond 45, genoux pliés si trop dur)',b:1,v:null},
@@ -417,10 +419,10 @@ var TESTS = [
  {id:'t_plg',cat:'Force',l:'Planche latérale, gauche',u:'secondes (plafond 60)',b:1,v:60},
  {id:'t_eqd',cat:'Force',l:'Équilibre unipodal yeux fermés, droite',u:'secondes (plafond 60)',b:1,v:45},
  {id:'t_eqg',cat:'Force',l:'Équilibre unipodal yeux fermés, gauche',u:'secondes (plafond 60)',b:1,v:45},
- {id:'t_ext',cat:'Force',l:'Tenue en extension dorsale',u:'secondes',b:1,v:60},
- {id:'t_pb',cat:'Force',l:'Planche avec levé de bras alterné, par côté',u:'répétitions',b:1,v:null},
- {id:'t_pk',cat:'Force',l:'Relevés de jambes tendues assise (pike lifts)',u:'répétitions',b:1,v:null},
- {id:'t_ls',cat:'Force',l:'L-sit en tuck sur blocs',u:'secondes',b:1,v:null},
+ {id:'t_ext',cat:'Force',l:'Tenue en extension dorsale',u:'secondes (plafond 120, arrête au moindre inconfort lombaire)',b:1,v:60},
+ {id:'t_pb',cat:'Force',l:'Planche avec levé de bras alterné, par côté',u:'répétitions (plafond 24)',b:1,v:null},
+ {id:'t_pk',cat:'Force',l:'Relevés de jambes tendues assise (pike lifts)',u:'répétitions (plafond 20)',b:1,v:null},
+ {id:'t_ls',cat:'Force',l:'L-sit en tuck sur blocs',u:'secondes (plafond 30)',b:1,v:null},
  {id:'t_ecd',cat:'Force',l:'Équilibre unipodal yeux fermés sur coussin, droite',u:'secondes (plafond 60)',b:1,v:null},
  {id:'t_ecg',cat:'Force',l:'Équilibre unipodal yeux fermés sur coussin, gauche',u:'secondes (plafond 60)',b:1,v:null},
  {id:'t_eld',cat:'Souplesse',l:'Écart latéral, jambe droite devant : bassin-sol',u:'cm',b:-1,v:18},
@@ -437,6 +439,24 @@ var TESTS = [
 var TCOLS=['S0','S4','S8','S12'];
 // Tests plafonnés au bilan S4 : on garde S0 et S4, on les retire de S8 et S12 (valeur = dernière semaine de test conservée)
 var T_END={t_pld:4,t_plg:4,t_eqd:4,t_eqg:4,t_sp:4,t_em:4,t_or:4};
+// Cibles des tests de force : p = plafond (on s'arrête là), d = cible de départ si aucun résultat avant, s = pas ajouté au dernier résultat.
+// Cible d'une semaine = min(plafond, dernier résultat + pas). On s'arrête dès que la cible est atteinte : jamais d'échec demandé.
+var TG={t_pi:{p:20,d:12,s:2,lw:{c:15,n:'baisse l\'appui d\'un cran (note la hauteur)'}},t_ps:{p:12,d:5,s:2},t_ch:{s:2},t_s1d:{p:20,d:16,s:2,lw:{c:15,n:'baisse la chaise d\'un cran (note la hauteur)'}},t_s1g:{p:20,d:16,s:2,lw:{c:15,n:'baisse la chaise d\'un cran (note la hauteur)'}},t_hc:{p:45,d:20,s:10},t_pld:{p:60,d:60,s:0},t_plg:{p:60,d:60,s:0},t_eqd:{p:60,d:60,s:15},t_eqg:{p:60,d:60,s:15},t_ext:{p:120,d:70,s:10},t_pb:{p:24,d:6,s:2},t_pk:{p:20,d:5,s:2},t_ls:{p:30,d:5,s:5},t_ecd:{p:60,d:30,s:10},t_ecg:{p:60,d:30,s:10}};
+function tLow(t,col){
+  var g=TG[t.id];if(!g||!g.lw||g.p==null)return null;
+  for(var k=TCOLS.indexOf(col)-1;k>=0;k--){var v=numv(tVal(t,TCOLS[k]));if(v!=null)return v>=g.p?g.lw:null;}
+  return null;
+}
+function tTarget(t,col){
+  var g=TG[t.id];if(!g)return null;
+  var lo=tLow(t,col);if(lo)return lo.c;
+  var i=TCOLS.indexOf(col),prev=null;
+  for(var k=i-1;k>=0;k--){var v=numv(tVal(t,TCOLS[k]));if(v!=null){prev=v;break;}}
+  var tg=null;
+  if(prev!=null&&g.s!=null)tg=prev+g.s;else if(g.d!=null)tg=g.d;
+  if(tg===null)return null;
+  return g.p!=null?Math.min(g.p,tg):tg;
+}
 
 // Planning : semaine normale
 var STD = {1:{k:'dance',t:'Danse (soir)',hint:'Le matin ou à midi : séance cardio L de 30 min. Option après le cours : bonus écarts de 5 à 8 min, muscles chauds.'},2:{k:'A'},3:{k:'N'},4:{k:'tissu',t:'Tissu (midi)',hint:'Option : bonus écarts de 5 à 8 min juste après la séance, muscles chauds.'},5:{k:'B'},6:{k:'C'},0:{k:'M'}};
@@ -765,6 +785,7 @@ function vSess(){
   if(!ui.sess){var p=planFor(now);ui.sess=p.sess||'M';}
   var S=SESS[ui.sess], r=wRow(w);
   var h='<div class="chips" role="group" aria-label="Choisir la séance">'+SORDER.map(function(k){return '<button class="chip" data-act="choose" data-sess="'+k+'" aria-pressed="'+(ui.sess===k?'true':'false')+'">'+SCHIP[k]+'</button>';}).join('')+'</div>';
+  h+='<div class="card"><div class="field"><label for="s-date">Date de la séance</label><input class="in" type="date" id="s-date" value="'+esc(date)+'" max="'+ymd(new Date())+'"><p class="small muted">Séance faite un autre jour ? Change la date ici : la séance se range au bon jour.</p><p id="dateMsg" class="small" role="status" hidden></p></div></div>';
   h+='<div class="card"><div class="row"><div class="grow"><h2 class="title num" style="font:800 22px/1.1 var(--f-display);text-transform:none;letter-spacing:-.01em;color:var(--ink)">'+esc(S.name)+'</h2><p class="muted small">'+esc(S.sub)+' · '+esc(S.mins)+'</p></div><span class="badge'+(r.dl&&w>=1?' warn':'')+'">'+(w>=1&&w<=12?'S'+w+(r.dl?' allégée':''):'S1')+'</span></div>'+(r.dl&&w>=1&&w<=12?'<p class="note warn">Semaine allégée : 1 série par exercice de force, RIR 4 ou plus, la mobilité continue.</p>':'')+'<p class="small muted">RIR = répétitions en réserve. Il varie selon l\'exercice : plus de marge sur une jambe, aux épaules et en gainage. Tempo = descente, pause en bas, montée, pause en haut, en secondes. Ne verrouille jamais genoux et coudes.</p></div>';
   S.blocks.forEach(function(b){
     h+='<div class="block-title"><h2>'+esc(b.t)+'</h2><span>'+esc(b.m)+'</span></div>';
@@ -888,7 +909,7 @@ function tVal(t,col){
 }
 function vTests(){
   var w=weekOf(new Date()), next=w<=0?'S0':(w<=4?'S4':(w<=8?'S8':'S12'));
-  var h='<section class="card"><h2>Tests de suivi</h2><p class="small muted">Semaines 0, 4, 8 et 12. Échauffe-toi 10 minutes, même heure, mêmes conditions. S4, S8 et S12 sont des semaines allégées : tu es fraîche. Prochain rendez-vous : <b>'+next+'</b>. Les cases bleues sont celles à remplir. Les tests plafonnés au bilan S4 (planche latérale, équilibre yeux fermés, squat profond, flexion d\'épaule au mur, toucher d\'orteils) ne sont plus demandés en S8 et S12.</p></section>';
+  var h='<section class="card"><h2>Tests de suivi</h2><p class="small muted">Semaines 0, 4, 8 et 12. Échauffe-toi 10 minutes, même heure, mêmes conditions. S4, S8 et S12 sont des semaines allégées : tu es fraîche. Prochain rendez-vous : <b>'+next+'</b>. Les cases bleues sont celles à remplir. <b>Chaque test de force a une cible : tu t\'arrêtes dès que tu l\'atteins, sans aller à l\'échec.</b> Si ta forme se dégrade avant, tu t\'arrêtes aussi et tu notes ce que tu as fait : ce n\'est pas raté, la cible suivante part de ton résultat. Une case verte = cible atteinte. Les tests plafonnés au bilan S4 (planche latérale, équilibre yeux fermés, squat profond, flexion d\'épaule au mur, toucher d\'orteils) ne sont plus demandés en S8 et S12.</p></section>';
   ['Force','Souplesse'].forEach(function(cat){
     h+='<section class="card"><h2>'+cat+'</h2>';
     TESTS.filter(function(t){return t.cat===cat;}).forEach(function(t){
@@ -896,8 +917,12 @@ function vTests(){
       ['S12','S8','S4'].forEach(function(c){if(last===null){var v=numv(tVal(t,c));if(v!=null)last=v;}});
       var dl='';
       if(s0!=null&&last!=null){var df=last-s0;var good=(df*t.b)>0;dl='<span class="delta '+(df===0?'':(good?'good':'badv'))+'">'+(df>0?'+':'')+fmt(df)+' depuis S0</span>';}
-      h+='<div class="test"><div><b>'+esc(t.l)+'</b><div class="small muted">'+esc(t.u)+' · '+(t.b>0?'plus haut = mieux':'plus bas = mieux')+(T_END[t.id]!=null?' · retiré après S4 (plafonné)':'')+' '+dl+'</div></div><div class="t4">';
-      TCOLS.forEach(function(c){if(T_END[t.id]!=null&&+c.slice(1)>T_END[t.id])return;h+='<label>'+c+'<input inputmode="decimal" autocomplete="off" data-test="'+t.id+'" data-col="'+c+'" value="'+esc(tVal(t,c))+'"'+(c===next?' class="next"':'')+'></label>';});
+      var nxc=null;
+      TCOLS.forEach(function(c){if(nxc===null&&TCOLS.indexOf(c)>=TCOLS.indexOf(next)&&numv(tVal(t,c))===null&&!(T_END[t.id]!=null&&+c.slice(1)>T_END[t.id]))nxc=c;});
+      var tgl='';
+      if(TG[t.id]){var tn=nxc?tTarget(t,nxc):null;if(t.id==='t_ch')tgl=nxc?'<div class="tgt">'+(tn!=null?'Cible '+nxc+' : '+fmt(tn)+' kg · ':'')+'tu t\'arrêtes à 8 répétitions propres</div>':'';else{var lo=nxc?tLow(t,nxc):null;tgl=tn!=null?'<div class="tgt">Cible '+nxc+' : '+fmt(tn)+(lo?' · plafond atteint, '+esc(lo.n):'')+' · tu t\'arrêtes là</div>':'';}}
+      h+='<div class="test"><div><b>'+esc(t.l)+'</b><div class="small muted">'+esc(t.u)+' · '+(t.b>0?'plus haut = mieux':'plus bas = mieux')+(T_END[t.id]!=null?' · retiré après S4 (plafonné)':'')+' '+dl+'</div>'+tgl+'</div><div class="t4">';
+      TCOLS.forEach(function(c){if(T_END[t.id]!=null&&+c.slice(1)>T_END[t.id])return;var tc=TG[t.id]?tTarget(t,c):null,cv=numv(tVal(t,c)),cls=(c===next?'next':'')+(c!=='S0'&&tc!=null&&cv!=null&&cv>=tc?' hit':'');h+='<label>'+c+'<input inputmode="decimal" autocomplete="off" data-test="'+t.id+'" data-col="'+c+'" value="'+esc(tVal(t,c))+'"'+(cls.trim()?' class="'+cls.trim()+'"':'')+'></label>';});
       h+='</div></div>';
     });
     h+='</section>';
@@ -1091,6 +1116,27 @@ function onInput(e){
 }
 document.addEventListener('input',function(e){if(e.target.matches('input[type="text"],input:not([type]),textarea')||e.target.dataset.test||e.target.dataset.load||e.target.dataset.steps||e.target.dataset.dnote)onInput(e);});
 document.addEventListener('change',function(e){if(e.target.matches('input[type="radio"],select'))onInput(e);});
+function moveSessionDate(nd){
+  var today=ymd(new Date());
+  if(!nd||nd===ui.date)return;
+  if(nd>today)nd=today;
+  var ok=ui.date+'_'+ui.sess, nk=nd+'_'+ui.sess, l=state.log[ok];
+  if(l){
+    if(state.log[nk]){
+      var inp=$('#s-date');if(inp)inp.value=ui.date;
+      showMsg('dateMsg','Il existe déjà une séance '+ui.sess+' à cette date. Ouvre-la d\'abord ou choisis un autre jour.');
+      return;
+    }
+    delete state.log[ok];
+    l.date=nd;l.week=weekOf(new Date(nd+'T12:00:00'));
+    state.log[nk]=l;
+    ui.date=nd;save();render();
+    showMsg('dateMsg','Séance rangée au '+nd.slice(8,10)+'/'+nd.slice(5,7)+'.');
+    return;
+  }
+  ui.date=nd;render();
+}
+document.addEventListener('change',function(e){if(e.target&&e.target.id==='s-date')moveSessionDate(e.target.value);});
 
 if(window.claude&&window.claude.hot&&window.claude.hot.snapshot){try{window.claude.hot.snapshot(function(){return {tab:ui.tab,sess:ui.sess};});}catch(e){}}
 render();
