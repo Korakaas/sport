@@ -1,0 +1,1104 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Programme 12 semaines</title>
+<meta name="theme-color" content="#EDF0F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D131A" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Programme de force et de souplesse sur 12 semaines, avec suivi des séances.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Programme 12s">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+@font-face{font-family:"Bricolage Grotesque";font-weight:600;font-style:normal;font-display:swap;src:url(fonts/bricolage-grotesque-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-weight:800;font-style:normal;font-display:swap;src:url(fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Hanken Grotesk";font-weight:400;font-style:normal;font-display:swap;src:url(fonts/hanken-grotesk-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Hanken Grotesk";font-weight:500;font-style:normal;font-display:swap;src:url(fonts/hanken-grotesk-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Hanken Grotesk";font-weight:600;font-style:normal;font-display:swap;src:url(fonts/hanken-grotesk-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Hanken Grotesk";font-weight:700;font-style:normal;font-display:swap;src:url(fonts/hanken-grotesk-latin-700-normal.woff2) format("woff2")}
+#syncNote{display:flex;flex-direction:column;gap:8px}
+#syncNote textarea{width:100%;min-height:84px;border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:8px;font-size:13px}
+#syncNote p{margin:0}
+</style>
+<style>
+/* Concept: carnet d'entraînement de poche. Fond ardoise froide, accent cobalt, numéros en grotesque à fort contraste. */
+:root{
+  --bg:#EDF0F4; --surface:#FFFFFF; --ink:#131B26; --muted:#586577; --line:#D3DAE3;
+  --accent:#2447D6; --accent-ink:#FFFFFF; --soft:#E2E8FB;
+  --ok:#1C8556; --ok-soft:#DDF1E7; --warn:#A85F00; --warn-soft:#F9EBD3; --bad:#B8303A; --bad-soft:#F8E1E3;
+  --f-display:"Bricolage Grotesque","Hanken Grotesk",system-ui,sans-serif;
+  --f-body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D131A; --surface:#161F29; --ink:#E7ECF2; --muted:#92A0B1; --line:#283441;
+    --accent:#86A0FF; --accent-ink:#0D131A; --soft:#1E2A4B;
+    --ok:#56C690; --ok-soft:#163528; --warn:#F2A845; --warn-soft:#3A2B12; --bad:#F2797F; --bad-soft:#3C1D21;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D131A; --surface:#161F29; --ink:#E7ECF2; --muted:#92A0B1; --line:#283441;
+  --accent:#86A0FF; --accent-ink:#0D131A; --soft:#1E2A4B;
+  --ok:#56C690; --ok-soft:#163528; --warn:#F2A845; --warn-soft:#3A2B12; --bad:#F2797F; --bad-soft:#3C1D21;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  background:var(--bg); color:var(--ink); font:16px/1.45 var(--f-body);
+  padding-block:0;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-tap-highlight-color:transparent;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+main{max-width:560px;margin:0 auto;padding-block:18px 150px;display:flex;flex-direction:column;gap:14px}
+h1,h2,h3,p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--f-display);font-variant-numeric:tabular-nums}
+
+/* En-tête */
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-top:4px}
+.top h1{font:800 24px/1.05 var(--f-display);letter-spacing:-.02em}
+.top .sync{flex-shrink:0}
+.top .date{color:var(--muted);font-size:14px;margin-top:4px}
+.top .date::first-letter{text-transform:uppercase}
+.sync{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap;background:var(--surface)}
+.sync.ok{color:var(--ok);border-color:var(--ok)}
+button.sync{cursor:pointer;font-family:inherit;min-height:32px}
+.pl{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}
+.pl:first-of-type{border-top:0}
+.pl b{font:800 15px var(--f-display)}
+.wlist{display:grid;grid-template-columns:36px 1fr auto;gap:8px;align-items:center;width:100%;text-align:left;border:0;border-top:1px solid var(--line);background:transparent;padding:10px 0;min-height:48px;font-size:13px;color:var(--ink)}
+.wlist b{font:800 15px var(--f-display)}
+.wlist.sel{color:var(--accent);font-weight:700}
+
+/* Cartes */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.card h2{font:700 13px/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;gap:10px;align-items:center}
+.row.wrap{flex-wrap:wrap}
+.grow{flex:1;min-width:0}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;background:var(--soft);color:var(--accent)}
+.badge.warn{background:var(--warn-soft);color:var(--warn)}
+.badge.ok{background:var(--ok-soft);color:var(--ok)}
+.badge.bad{background:var(--bad-soft);color:var(--bad)}
+
+/* Séance du jour */
+.today{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.letter{width:76px;height:76px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:800 44px/1 var(--f-display)}
+.letter.off{background:var(--soft);color:var(--accent);font-size:30px}
+.today h2.title{font:800 22px/1.1 var(--f-display);text-transform:none;letter-spacing:-.01em;color:var(--ink)}
+.btn{border:0;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:700;padding:13px 16px;min-height:48px;width:100%;text-align:center}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.btn.small{min-height:40px;padding:8px 12px;width:auto;font-size:14px}
+.btn:disabled{opacity:.5}
+
+/* Semaine */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{border:1px solid var(--line);border-radius:10px;padding:7px 0 6px;text-align:center;background:var(--bg);display:flex;flex-direction:column;gap:2px;align-items:center}
+.day b{font:700 11px/1 var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.day i{font:800 18px/1.1 var(--f-display);font-style:normal}
+.day span{font-size:10px;color:var(--muted);min-height:12px}
+.day.now{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.day.done{background:var(--ok-soft);border-color:var(--ok)}
+.day.done i{color:var(--ok)}
+.target{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.target div{display:flex;flex-direction:column;gap:2px}
+.target b{font:800 20px/1.1 var(--f-display)}
+.target span{font-size:12px;color:var(--muted)}
+
+/* Choix de séance */
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;min-height:40px;font-weight:600;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* Exercices */
+.block-title{display:flex;justify-content:space-between;align-items:baseline;padding:10px 2px 0}
+.block-title h2{font:800 18px/1.1 var(--f-display);color:var(--ink);text-transform:none;letter-spacing:-.01em}
+.block-title span{font-size:13px;color:var(--muted)}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.ex.done{border-color:var(--ok)}
+.ex h3{font:700 17px/1.2 var(--f-body)}
+.rx{font-size:14px;color:var(--muted);margin-top:3px}
+.rx b{color:var(--ink);font-weight:700}
+.sets{display:flex;gap:8px;flex-wrap:wrap}
+.set{width:52px;height:48px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);font:800 18px/1 var(--f-display)}
+.set[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.load{display:flex;align-items:center;gap:8px;flex:1;min-width:180px}
+.load input{width:84px;min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:6px 10px;font:700 18px var(--f-display);text-align:center}
+.load label{font-size:13px;color:var(--muted);line-height:1.2}
+details summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;padding:4px 0;min-height:32px}
+details dl{margin:6px 0 0;display:grid;gap:8px;font-size:14px}
+details dt{font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+details dd{margin:0}
+
+/* Fin de séance */
+.seg{display:flex;gap:6px}
+.seg label{flex:1}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:grid;place-items:center;min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);font-weight:700}
+.seg input:checked+span{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.seg input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field>label,.field>.lab{font-size:13px;font-weight:600;color:var(--muted)}
+select,textarea,.in{border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:10px 12px;min-height:44px;width:100%}
+textarea{min-height:76px;resize:vertical}
+.alert{border-radius:10px;padding:12px;background:var(--bad-soft);color:var(--bad);font-size:14px;font-weight:600}
+.note{border-radius:10px;padding:12px;background:var(--soft);font-size:14px}
+.note.warn{background:var(--warn-soft)}
+
+/* Suivi */
+.wk{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.wk:first-of-type{border-top:0}
+.wk b{font:800 15px var(--f-display)}
+.dots{display:flex;gap:5px}
+.dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line)}
+.dot.on{background:var(--ok);border-color:var(--ok)}
+.dot.dl{border-style:dashed}
+.log{display:flex;flex-direction:column;gap:4px;padding:10px 0;border-top:1px solid var(--line)}
+.log:first-of-type{border-top:0}
+.hist{display:flex;gap:6px;flex-wrap:wrap}
+.hist span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;color:var(--muted)}
+.hist span b{color:var(--ink)}
+
+/* Tests */
+.test{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
+.test:first-of-type{border-top:0}
+.t4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.t4 label{display:flex;flex-direction:column;gap:3px;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.t4 input{width:100%;min-height:44px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);padding:6px;text-align:center;font:700 17px var(--f-display)}
+.t4 input.next{border-color:var(--accent)}
+.delta{font-size:13px;font-weight:700}
+.delta.good{color:var(--ok)} .delta.badv{color:var(--bad)}
+
+/* Repères */
+.guide p,.guide li{font-size:15px}
+.guide ul{margin:0;padding-left:20px;display:grid;gap:6px}
+
+/* Minuteur */
+#timer{position:fixed;left:0;right:0;bottom:calc(66px + env(safe-area-inset-bottom,0px));z-index:20;padding:0 max(16px, env(safe-area-inset-left,0px));pointer-events:none}
+#timer .in-bar{pointer-events:auto;max-width:560px;margin:0 auto 8px;background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+#timer .t{font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums;min-width:86px}
+#timer .l{flex:1;min-width:0;font-size:13px;line-height:1.25}
+#timer button{border:1.5px solid color-mix(in srgb,var(--bg) 55%,transparent);background:transparent;color:var(--bg);border-radius:10px;min-height:42px;min-width:48px;padding:0 10px;font-weight:700}
+#timer.end .in-bar{background:var(--ok);color:#fff}
+#timer.end .in-bar button{color:#fff;border-color:#fff}
+
+/* Barre d'onglets */
+nav{position:fixed;left:0;right:0;bottom:0;z-index:25;background:var(--surface);border-top:1px solid var(--line);padding:6px max(8px, env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px, env(safe-area-inset-right,0px))}
+nav .tabs{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(6,1fr);gap:2px}
+nav button{border:0;background:transparent;border-radius:10px;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:11px;font-weight:600;color:var(--muted)}
+nav button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-current="page"]{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){ .set,.btn,.chip{transition:background-color .12s,border-color .12s} }
+</style>
+
+<main id="app" aria-live="polite"></main>
+<div id="timer" hidden></div>
+<nav aria-label="Navigation">
+  <div class="tabs" id="tabs"></div>
+</nav>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= Données du programme ================= */
+var START = new Date(2026, 9, 19); // lundi 19 octobre 2026 = début de la semaine 1
+var DAYS = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+var DSHORT = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+
+// Tableau de progression du document (semaines 1 à 12)
+var W = [null,
+ {p:'Fondations',n:2,legs:'8',push:'6',tempo:'3-1-1-0',rir:'3-4',core:6,amp:'Confortable, intensité 6/10, supports hauts'},
+ {p:'Fondations',n:2,legs:'8-10',push:'7',tempo:'3-1-1-0',rir:'3',core:8,amp:'Tenues de 30 s, 3 cycles de contracter-relâcher'},
+ {p:'Fondations',n:2,legs:'8-10',push:'8',tempo:'3-1-1-0',rir:'2-3',core:8,amp:'Un cran de support en moins si c\'est contrôlé',note:'Les charges montent (voir « Visée » sur chaque exercice). Les reps retombent vers 8, remonte vers 10 avant de recharger.'},
+ {p:'Fondations',n:1,legs:'8',push:'6',tempo:'3-1-1-0',rir:'4+',core:6,amp:'Maintien à 5/10',dl:true,note:'Semaine allégée et tests S4.'},
+ {p:'Développement',n:2,legs:'6-8',push:'6',tempo:'3-1-1-0',rir:'2-3',core:8,amp:'Étirements lestés introduits, tenues de 40 s',note:'Nouvelles variantes cette semaine.'},
+ {p:'Développement',n:2,legs:'8',push:'8',tempo:'3-1-1-0',rir:'2-3',core:8,amp:'4 cycles de contracter-relâcher',note:'Semaine sans week-end : A mardi, B mercredi (avec la mini-mobilité du mercredi), tissu jeudi, C vendredi. La mini-mobilité du dimanche passe au lundi soir, après la danse. Pas de séance L cette semaine : reprise lundi 30.'},
+ {p:'Développement',n:2,legs:'10',push:'10',tempo:'3-1-1-0',rir:'2',core:10,amp:'Supports encore un cran plus bas',note:'Ou plus de charge.'},
+ {p:'Développement',n:1,legs:'6',push:'6',tempo:'3-1-1-0',rir:'4+',core:6,amp:'Maintien',dl:true,note:'Semaine allégée et tests S8.'},
+ {p:'Intensification',n:2,legs:'6-8',push:'6',tempo:'4-1-1-0',rir:'2',core:8,amp:'Isométriques de 30 s en fin d\'amplitude',note:'Charge plus haute, pompes plus basses.'},
+ {p:'Intensification',n:2,legs:'8',push:'8',tempo:'4-1-1-0',rir:'1-2',core:10,amp:'Supports au minimum'},
+ {p:'Intensification',n:2,legs:'8-10',push:'10',tempo:'4-1-1-0',rir:'1-2',core:10,amp:'Tenues actives de 45 s'},
+ {p:'Intensification',n:1,legs:'6',push:'6',tempo:'3-1-1-0',rir:'4+',core:6,amp:'Maintien',dl:true,note:'Semaine allégée et tests finaux S12.'}
+];
+
+// Détails d'exécution : c = cues, e = erreurs, r = régression, p = progression
+var D = {
+ hipcircles:{n:'Cercles de hanche en quadrupédie',c:'À quatre pattes, dessine de grands cercles lents avec le genou, bassin stable.',e:'Cercles trop petits, bassin qui bouge.',r:'Réduis l\'amplitude.',p:'Ralentis et agrandis le cercle.'},
+ lungerot:{n:'Fente basse avec rotation',c:'Fente basse, main intérieure au sol, ouvre le buste vers la jambe avant puis reviens.',e:'Genou avant qui rentre, dos qui s\'arrondit.',r:'Mains sur une chaise.',p:'Tenue de 2 s en rotation.'},
+ balcoussin:{n:'Équilibre unipodal sur coussin, bras en mouvement',c:'Micro-flexion du genou d\'appui, bassin carré, regard fixe. Bouge les bras lentement (devant, sur les côtés, au-dessus de la tête).',e:'Verrouiller le genou, laisser la hanche partir sur le côté.',r:'Sur le sol, sans coussin.',p:'Yeux fermés, ou mouvements de tête.'},
+ squat1:{n:'Squat sur une jambe vers une chaise, lesté',c:'Pied d\'appui sous la hanche, jambe libre devant (commence toujours par le côté gauche, le plus faible, et vise le même nombre de répétitions à droite), haltère contre la poitrine, coudes sous la charge, genou dans l\'axe des orteils. Descends en 3 s jusqu\'à effleurer la chaise sans t\'y asseoir, dos neutre.',e:'Talon qui décolle, genou qui rentre, te laisser tomber sur la chaise.',r:'Sans charge, ou chaise plus haute.',p:'Pause de 3 s près de la chaise, chaise plus basse, puis plus de charge (jusqu\'à 10 kg).'},
+ rdl:{n:'Soulevé de terre jambes tendues',c:'Genoux légèrement fléchis et jamais verrouillés, hanches vers l\'arrière, haltères le long des cuisses, descends jusqu\'à sentir les ischios.',e:'Dos qui s\'arrondit, mouvement qui devient un squat, cambrure au sommet.',r:'Sans charge, avec un balai le long du dos.',p:'Version unilatérale (1 haltère, appui sur une jambe).'},
+ bulgare:{n:'Fente bulgare (pied arrière sur une chaise)',c:'Pied arrière posé sur une chaise (lacets sur l\'assise), pas assez long pour garder le genou avant au-dessus de la cheville, buste légèrement penché, descends en 3 s jusqu\'à frôler le sol avec le genou arrière.',e:'Pas trop court, bassin qui bascule, poids reporté sur le pied arrière.',r:'Poids du corps, une main sur un mur, ou fente arrière.',p:'Haltères en main (jusqu\'à 10 kg chacun), puis pause de 3 s en bas.'},
+ bridge1:{n:'Pont fessier une jambe, lesté',c:'Une jambe tendue en l\'air, talon d\'appui proche des fesses, pousse dans le talon, côtes basses, monte jusqu\'à l\'alignement épaules-hanches-genoux. Haltère sur les hanches.',e:'Cambrer le bas du dos au sommet, pousser avec les orteils.',r:'Deux pieds au sol, avec haltère.',p:'Épaules sur un canapé (hip thrust) une jambe, ou haltère plus lourd.'},
+ birddog:{n:'Bird-dog avec coude-genou',c:'Dos plat, bassin immobile (un verre posé sur le bas du dos), tends bras et jambe opposés sans les lever plus haut que le corps. Entre chaque répétition, ramène coude et genou l\'un vers l\'autre sous le corps sans arrondir le dos.',e:'Bassin qui tourne, dos qui se creuse.',r:'Bouger seulement la jambe, puis seulement le bras.',p:'Tenue de 5 s au bout du bras, ou haltère léger posé sur le bas du dos.'},
+ couch:{n:'Étirement du canapé (quadriceps et fléchisseurs de hanche)',c:'Genou arrière au sol contre un mur ou un canapé (coussin dessous), tibia et dessus du pied remontés contre le mur, pointe vers le haut. L\'autre pied est devant, en fente. Serre le fessier de la jambe arrière, rentre le bassin (pubis vers le nombril), puis redresse le buste petit à petit. Tu sens le devant de la cuisse et de la hanche arrière s\'étirer. Respire lentement.',e:'Se creuser le bas du dos, pincement au genou, tirer fort sur le pied.',r:'Éloigne le genou du mur, ou reste en fente basse, mains sur une chaise.',p:'Buste complètement vertical, puis bras opposé à la jambe arrière levé au-dessus de la tête. Variante plus tard : pose de l\'arc sur le ventre.'},
+ hamcr:{n:'Ischios en contracter-relâcher (sangle)',c:'Allongée sur le dos, sangle sous le pied, jambe levée avec une légère flexion du genou. Pousse le pied dans la sangle à 30-50 % de ton effort pendant 5 s, relâche, puis tire la jambe plus près en contractant les fléchisseurs de hanche pendant 5 s. C\'est un cycle.',e:'Forcer, bassin qui décolle, genou verrouillé.',r:'Genou plus fléchi.',p:'Jambe plus haute, contraction active plus longue.'},
+ frog:{n:'Grenouille active',c:'Quadrupédie, genoux écartés (coussin dessous), pieds en ligne avec les genoux. Une série, dans l\'ordre : 1) recule les hanches doucement et installe-toi ; 2) serre les genoux l\'un vers l\'autre sans les bouger pendant 5 s, une seule fois ; 3) relâche et recule encore un peu les hanches ; 4) tiens 30 s en respirant.',e:'Creuser le bas du dos, écarter trop large trop vite.',r:'Genoux moins écartés, ou papillon assis.',p:'Plus large, bassin plus bas.'},
+ slr:{n:'Levé de jambe tendue actif',c:'Allongée sur le dos, une jambe tendue au sol, lève l\'autre jambe tendue le plus haut possible, pointe tirée, bassin immobile, tiens 3 s en haut. C\'est l\'amplitude active qui te manque le plus pour l\'écart latéral.',e:'Balancer la jambe, bassin qui bascule.',r:'Genou légèrement fléchi.',p:'Tenue plus longue, ou élastique autour du pied.'},
+ child:{n:'Position de l\'enfant, respiration lente',c:'À genoux, fesses vers les talons, front au sol, respire lentement par le nez.',e:'Forcer, retenir sa respiration.',r:'Coussin sous les fesses ou sous le front.',p:'Respirations plus longues.'},
+ shcircles:{n:'Cercles d\'épaule, bras tendus',c:'Debout, bras tendus sur les côtés, petits puis grands cercles lents dans les deux sens.',e:'Hausser les épaules, cambrer.',r:'Amplitude réduite.',p:'Cercles plus grands.'},
+ catcow:{n:'Chat-vache + rotation thoracique',c:'À quatre pattes, arrondis puis creuse doucement. Puis une main derrière la tête, ouvre le coude vers le plafond.',e:'Forcer la cambrure lombaire.',r:'Amplitude réduite.',p:'Pause de 2 s en rotation.'},
+ tbal:{n:'Équilibre en T (avion)',c:'Sur une jambe (genou souple), penche le buste en avant, bras écartés, corps aligné de la tête au talon.',e:'Bassin qui s\'ouvre, genou verrouillé.',r:'Doigts contre un mur.',p:'Tenue plus longue.'},
+ pushup:{n:'Pompes inclinées',c:'Mains sur une table solide ou un canapé. Corps en planche, coudes à environ 45° du buste, poitrine vers le support, omoplates stables.',e:'Bassin qui tombe ou se cambre, coudes écartés à 90°, nuque en avant. Ne verrouille pas les coudes en haut.',r:'Appui plus haut, jusqu\'au mur.',p:'Appui plus bas jusqu\'à la pompe au sol, puis tempo lent ou pause.'},
+ row1:{n:'Rowing à un bras (appui sur une chaise)',c:'Dos plat, tire le coude vers la hanche, serre l\'omoplate vers la colonne, tiens 1 s en haut.',e:'Épaule qui monte vers l\'oreille, buste qui tourne.',r:'Haltère plus léger.',p:'Charge ou pause de 3 s en haut.'},
+ ohp:{n:'Développé d\'épaules aux haltères',c:'Côtes basses, abdos serrés, bras proches des oreilles en haut sans hausser les épaules.',e:'Cambrer le bas du dos, verrouiller les coudes. Si tes bras ne montent pas à la verticale sans te cambrer, remplace par des élévations latérales légères.',r:'Charge plus légère, en position assise.',p:'Pause de 2 s en haut, puis version unilatérale.'},
+ pullover:{n:'Pull-over au sol avec haltère',c:'Allongée sur le dos, genoux fléchis, pieds au sol, un haltère tenu à deux mains au-dessus de la poitrine, coudes souples. Descends les bras derrière la tête en 3 s, aussi loin que les côtes restent basses, puis ramène l\'haltère en tirant avec le dos, comme pour pousser tes coudes vers tes hanches.',e:'Côtes qui s\'ouvrent, bas du dos qui se creuse, coudes verrouillés, aller trop loin derrière la tête.',r:'Haltère plus léger, ou amplitude réduite.',p:'Pause de 2 s bras en arrière, puis plus de charge.'},
+ row2:{n:'Rowing penché à deux haltères',c:'Debout, genoux souples, hanches vers l\'arrière, buste incliné à environ 45°, dos plat, haltères sous les épaules. Tire les coudes vers les hanches, serre les omoplates 1 s, redescends en 2 s.',e:'Dos qui s\'arrondit, buste qui remonte à chaque répétition, genoux verrouillés, épaules vers les oreilles.',r:'Une main et un genou sur une chaise (rowing à un bras), ou buste plus redressé.',p:'Pause de 2 s en haut, puis plus de charge.'},
+ ytw:{n:'Y-T-W sur le ventre',c:'Front posé au sol, pouces vers le plafond, lève les bras en formant les lettres, tiens 1 s en haut. Un seul tour, sans répéter.',e:'Cambrer le cou ou le bas du dos, hausser les épaules.',r:'Bras soulevés de quelques centimètres seulement.',p:'1-2 kg dans chaque main.'},
+ extdorsale:{n:'Extension dorsale au sol (superman tenu)',c:'Allongée sur le ventre, front près du sol, bras le long du corps ou en Y, jambes tendues. Lève la poitrine et les jambes de quelques centimètres en serrant les fessiers, regard vers le sol, nuque longue. Tiens 5 s en respirant, redescends en 2 s.',e:'Cambrer le bas du dos au lieu de monter par le haut du dos, lever la tête, serrer les épaules vers les oreilles.',r:'Lève seulement la poitrine, ou seulement les jambes, ou garde les bras devant sur le sol.',p:'Tenue plus longue (8 à 10 s), puis bras en Y, puis 1 kg dans les mains.'},
+ plankreach:{n:'Planche avec levé de bras alterné',c:'Coudes sous les épaules, fessiers et abdos serrés. Lève un bras tendu devant toi sans que le bassin bouge, tiens 2 s, repose, change de côté.',e:'Bassin qui tourne, bas du dos creusé.',r:'Planche immobile sur les avant-bras, 30 s, sans lever le bras.',p:'Levé de bras et de jambe opposés, puis glissants.'},
+ wallangel:{n:'Wall angels (flexion d\'épaule active au mur)',c:'Dos, tête et fessiers contre le mur, côtes basses, glisse les bras vers le haut en gardant poignets et coudes au contact du mur.',e:'Cambrer le bas du dos, décoller les bras.',r:'Amplitude réduite, ou bras en W seulement.',p:'Tenue plus longue en haut, puis un élastique entre les poignets.'},
+ lats:{n:'Étirement du dorsal en « enfant » + contracter-relâcher',c:'À genoux, fesses vers les talons, bras tendus devant sur le sol, mains à largeur d\'épaules, front vers le sol. Un cycle : 1) appuie les mains dans le sol 5 s, comme pour ramener le tapis vers toi, sans bouger les mains, à 30-50 % de ton effort ; 2) relâche et recule les hanches un peu plus loin ; 3) tiens environ 20 s en respirant. 3 cycles. Genoux à la largeur des hanches, tête entre les bras, côtes basses.',e:'Forcer sur les épaules, creuser le bas du dos (ce serait la pose du chiot).',r:'Mains sur une chaise.',p:'Version latérale si tu ne sens rien : avance les deux mains vers la droite, recule les hanches vers le talon gauche, tu sens le flanc gauche s\'étirer. Puis l\'autre côté. Sinon, contraction plus longue.'},
+ priere:{n:'Prière à la chaise, lestée',c:'À genoux, hanches au-dessus des genoux, coudes (ou mains) posés sur une chaise ou le canapé, un livre ou un haltère de 2 kg dans les mains. Fais descendre la poitrine vers le sol en gardant les côtes basses et le bas du dos neutre. Respire lentement.',e:'Creuser le bas du dos, laisser les côtes s\'ouvrir.',r:'Sans charge, support plus haut.',p:'Charge plus lourde, support plus bas. Dès la S5 : pont mains surélevées.'},
+ pontsurelev:{n:'Pont mains surélevées',c:'Allongée sur le dos, pieds au sol à la largeur des hanches, mains à plat sur un support solide derrière la tête (assise de canapé ou chaise calée contre un mur), doigts vers les pieds. Pousse dans les talons et les mains, monte le bassin et pousse les épaules vers l\'avant au-dessus des mains. La cambrure vient du haut du dos et des épaules.',e:'Cambrure lombaire, genoux qui s\'écartent, coudes verrouillés.',r:'Support plus haut, ou pont fessier bras levés.',p:'Support plus bas, tenue plus longue.'},
+ resp:{n:'Respiration lente allongée, épaules relâchées',c:'Allongée sur le dos, une main sur le ventre, inspire par le nez, expire lentement, épaules relâchées.',e:'Retenir sa respiration.',r:'Respirations plus courtes.',p:'Respirations plus longues.'},
+ cars:{n:'Rotations de hanche debout (CARs)',c:'Debout, appuyée à un mur, lève le genou, ouvre-le vers l\'extérieur puis ramène la jambe en arrière, cercle le plus grand possible sans bouger le bassin.',e:'Bassin qui bouge, cercle forcé.',r:'Amplitude réduite.',p:'Plus lent, plus grand.'},
+ deepsquat:{n:'Squat profond tenu, avec balancements',c:'Accroupie, talons au sol (un livre sous les talons si besoin), coudes contre l\'intérieur des genoux, balance doucement d\'un côté à l\'autre.',e:'Talons qui décollent, dos qui s\'arrondit trop.',r:'Talons sur un livre, mains sur un support.',p:'Tenue plus longue.'},
+ unieyes:{n:'Équilibre unipodal yeux fermés, sur coussin',c:'Micro-flexion du genou d\'appui, bassin carré, regard fixe puis yeux fermés.',e:'Verrouiller le genou, laisser la hanche partir sur le côté.',r:'Sur le sol sans coussin, puis yeux ouverts, doigts contre un mur.',p:'Mouvements lents de bras ou de tête, puis coussin plus épais.'},
+ crow:{n:'Corbeau (préparation)',c:'Accroupie, mains à largeur d\'épaules, doigts bien écartés, genoux contre l\'arrière des bras, regard à environ 30 cm devant toi, coussin devant le visage. Transfère le poids vers l\'avant jusqu\'à décoller un pied, puis les deux.',e:'Regarder les pieds, coudes qui s\'écartent, poignets qui s\'affaissent. Pousse bien dans le sol avec les doigts, pour protéger tes poignets.',r:'Un seul pied décolle.',p:'Tenue de 10 s. L\'appui tendu au mur viendra en phase 2 ou 3.'},
+ stepup:{n:'Montée sur chaise (step-up), haltères en main',c:'Chaise solide calée contre un mur, ou marche d\'escalier. Haltères le long du corps, pied entier posé sur le support, pousse dans le talon, monte sans élan, redescends en 2 s.',e:'Pousser avec la jambe restée au sol, genou qui rentre, buste penché.',r:'Support plus bas (livre épais).',p:'Support plus haut, plus de charge (jusqu\'à 10 kg par main), ou genou haut avec 2 s d\'équilibre en haut.'},
+ rdl1:{n:'Soulevé de terre unilatéral',c:'Haltère dans la main opposée à la jambe d\'appui (4-6 kg pour commencer). Genou d\'appui légèrement fléchi, bassin carré, jambe libre qui part en arrière comme un balancier, dos plat.',e:'Hanche qui s\'ouvre, dos arrondi, genou verrouillé.',r:'Orteils de la jambe libre au sol, ou doigts contre un mur.',p:'Plus de charge, ou pause de 3 s en bas.'},
+ pushpause:{n:'Pompes inclinées avec pause',c:'Comme en séance B. La différence : marque 2 s de pause, poitrine proche du support.',e:'Bassin qui tombe, coudes verrouillés en haut.',r:'Appui plus haut.',p:'Appui plus bas.'},
+ farmer:{n:'Marche du fermier',c:'Un haltère dans chaque main (8-10 kg par haltère). Épaules basses, côtes basses, marche lente, regard devant.',e:'Se pencher d\'un côté, hausser les épaules, cambrer.',r:'Charges plus légères.',p:'Charges plus lourdes, ou un seul haltère (marche « en valise »).'},
+ sideplank:{n:'Planche latérale avec levé de jambe',c:'Coude sous l\'épaule, hanches hautes, corps aligné de la tête aux pieds. Lève la jambe du dessus de 20-30 cm, tiens 2 s, redescends.',e:'Bassin qui tombe, épaule qui monte vers l\'oreille.',r:'Tenue de 30 s sans lever la jambe, ou genoux pliés au sol.',p:'Levé de jambe tenu 3 s, ou planche latérale sur la main, bras tendu.'},
+ deadbug:{n:'Dead bug lent',c:'Dos au sol, bras vers le plafond, genoux à 90°. Garde le bas du dos plaqué et tends lentement le bras et la jambe opposés, 4 s par mouvement.',e:'Dos qui se creuse, aller trop vite.',r:'Bouger seulement les jambes, ou seulement les bras.',p:'Haltère léger tenu à deux mains.'},
+ pike:{n:'Relevés de jambes tendues assise (pike lifts)',c:'Assise, jambes tendues devant toi, mains au sol (ou sur des livres) près des hanches, pointes tirées. Pousse dans les mains, serre les cuisses et lève les talons de quelques centimètres sans plier les genoux, tiens 2 s. C\'est la force de compression utilisée pour les renversés au tissu.',e:'Dos qui s\'arrondit, genoux qui se plient, épaules vers les oreilles. Garde les genoux souples sans les verrouiller.',r:'Genoux fléchis, ou seulement glisser les talons vers toi.',p:'Talons plus hauts, tenue de 5 s, puis les mêmes relevés jambes écartées.'},
+ lsit:{n:'L-sit en tuck (genoux fléchis)',c:'Assise, mains sur deux blocs ou deux piles de livres de chaque côté des hanches, épaules basses, bras tendus avec les coudes souples. Pousse dans le sol pour décoller les fesses et les pieds, genoux fléchis près de la poitrine, tiens 10 s.',e:'Épaules vers les oreilles, dos arrondi, coudes verrouillés, poignets qui s\'affaissent (pousse avec les doigts).',r:'Décoller seulement les fesses, un pied à la fois.',p:'Une jambe tendue puis l\'autre, et en phase 3 les deux jambes tendues.'},
+ walk:{n:'Marche rapide',c:'Marche à une allure soutenue, bras actifs, sans pause. Test de la parole : tu peux dire une phrase entière mais pas chanter. Si tu peux chanter, accélère un peu. Si tu ne peux dire que quelques mots, ralentis. Lance le chrono puis marche dehors ou sur un tapis.',e:'Marcher trop lentement, regarder son téléphone en marchant, courir sans y être habituée.',r:'15 min à une allure confortable.',p:'Ajoute 5 min toutes les deux semaines, jusqu\'à 40 min, ou choisis un parcours avec des côtes.'},
+ halfsplit:{n:'Demi-écart latéral actif',c:'Jambe avant tendue, genou arrière sur un coussin, mains sur des livres. Bassin carré, talon avant au sol, pointe tirée, genou avant légèrement fléchi. Pousse le talon dans le sol 5 s, relâche, puis incline le buste en avant avec les fléchisseurs de hanche et les abdos, sans pousser avec les mains.',e:'Dos arrondi, bassin qui pivote.',r:'Genou avant plus fléchi, livres plus hauts.',p:'Livres plus bas, tenue plus longue.'},
+ pancake:{n:'Pancake actif (écart facial)',c:'Assise sur un coussin, jambes écartées à un angle confortable, genoux vers le plafond, mains sur des livres devant toi. Une série, dans l\'ordre : 1) pousse les talons dans le sol 5 s, une seule fois ; 2) relâche et incline le buste en gardant le dos long ; 3) tiens la durée indiquée (30 s en séance C, 45 s en mini-mobilité) en respirant ; 4) soulève activement une jambe tendue de quelques centimètres pendant 2 s, en alternant, 5 relèvements en tout. Puis repos.',e:'Dos arrondi, genoux qui roulent vers l\'intérieur, forcer l\'ouverture.',r:'Jambes moins écartées, coussin plus haut.',p:'Écartement plus large, relevés tenus 3 s.'},
+ cossack:{n:'Squat cossack lent',c:'Jambes écartées larges, descends sur une jambe, l\'autre tendue, orteils vers le haut. Garde le buste droit et le talon de la jambe pliée au sol.',e:'Talon qui décolle, genou qui rentre, buste qui s\'effondre.',r:'Amplitude réduite, main sur une chaise.',p:'Pause de 3 s en bas, puis plus de charge. Haltère en gobelet (2 à 6 kg) : tiens-le contre la poitrine à deux mains, coudes sous la charge. Il sert de contrepoids, aide à rester droite et à descendre plus bas. Note la charge, 0 = sans.'},
+ bridgearms:{n:'Pont fessier bras levés',c:'Pieds proches des fesses, monte le bassin en poussant dans les talons. Amène les bras tendus au-dessus de la tête vers le sol, côtes basses, et tiens.',e:'Creuser le bas du dos, côtes qui s\'ouvrent. L\'ouverture doit venir des épaules et du haut du dos.',r:'Bras en croix, ou le long du corps.',p:'Mains sur un support surélevé (canapé), pieds au sol. Le pont complet au sol est un objectif de phase 3, sans garantie en 12 semaines.'},
+ sphinx:{n:'Sphinx, pied vers la tête',c:'Sur le ventre, appuyée sur les avant-bras. Plie un genou et lève le pied vers la tête avec le fessier, sans l\'attraper avec la main. Hanche au sol, la cambrure vient du haut du dos.',e:'Cambrer le bas du dos, hausser les épaules.',r:'Sphinx seul, sans lever le pied.',p:'Attraper le pied avec la main, puis version sur les mains. Le scorpion complet est un objectif à long terme.'},
+ wrists:{n:'Échauffement des poignets',c:'1) Cercles de poignets bras tendus devant : 10 dans chaque sens. 2) Flexion et extension, paumes vers le haut puis vers le bas : 10 fois chacune, sans forcer. 3) À quatre pattes, mains à plat : balance doucement le poids vers l\'avant et l\'arrière 10 fois, puis tourne les doigts vers les côtés. 4) Doigts écartés, pousse dans le sol avec tous les doigts.',e:'Forcer l\'extension, charger seulement la paume, retenir sa respiration.',r:'Mains en poings, ou appui sur des haltères.',p:'Allonge un peu les balancements, ou garde la position plus longtemps.'},
+ dog:{n:'Chien tête en bas',c:'À quatre pattes, mains à largeur d\'épaules, doigts écartés. Pousse dans le sol avec les doigts et lève les hanches vers le plafond, genoux fléchis au début. Dos long, tête entre les bras, épaules loin des oreilles, côtes rentrées. Pédale doucement en pliant un genou puis l\'autre, ou reste immobile en respirant.',e:'Verrouiller les coudes, laisser les poignets s\'affaisser, arrondir le bas du dos pour tendre les jambes, laisser les épaules s\'effondrer vers le sol.',r:'Genoux fléchis, ou mains sur une chaise solide pour réduire la charge sur les épaules.',p:'Jambes plus tendues si le dos reste long, puis lève une jambe tendue 3 s. Dès la semaine 9 : pieds sur une chaise, préparation au poirier face au mur.'},
+ sunsal:{n:'Salutation au soleil adaptée',c:'Un mouvement par respiration, lentement. Debout, bras levés, côtes basses ; descends en flexion avant, genoux fléchis ; remonte à mi-hauteur, dos plat, mains sur les cuisses ; recule en planche sur les genoux ; descends genoux, poitrine et menton vers le sol ; sphinx ; chien tête en bas, genoux souples, 3 respirations ; avance un pied entre les mains, puis l\'autre, et remonte en déroulant le dos.',e:'Chaturanga complet, cobra qui creuse le bas du dos, genoux ou coudes verrouillés, enchaîner trop vite.',r:'Reste sur les genoux pour la planche, et fais le sphinx au lieu du cobra.',p:'Ajoute une fente basse de chaque côté avant de remonter, ou fais 3 tours.'},
+ moonsal:{n:'Salutation à la lune',c:'Lente et fluide, de préférence le soir. Debout jambes écartées, pieds légèrement tournés vers l\'extérieur, bras levés. Incline le buste d\'un côté puis de l\'autre, côtes basses. Squat large (déesse), bras en cactus, puis fente latérale à droite, retour au centre, fente latérale à gauche. Termine en pyramide : buste incliné, dos long, genoux souples, mains sur les cuisses ou sur des livres, puis remonte lentement.',e:'Genoux qui rentrent dans le squat large, dos arrondi dans la pyramide, forcer l\'écart.',r:'Écartement moins large, mains sur une chaise.',p:'Tenue de 3 respirations dans chaque fente, ou squat large plus bas.'},
+ twist:{n:'Torsion allongée + respiration',c:'Allongée sur le dos, genoux fléchis posés d\'un côté, bras en croix, regard de l\'autre côté, respire lentement.',e:'Forcer la rotation, épaule qui décolle.',r:'Coussin sous les genoux.',p:'Respirations plus longues.'},
+ pelvtilt:{n:'Bascule de bassin',c:'Allongée sur le dos, genoux fléchis, pieds au sol. Aplatis doucement le bas du dos contre le sol en rentrant le bassin (pubis vers le nombril), puis reviens à la position neutre. Le mouvement vient du bassin, pas des fessiers ni des jambes.',e:'Pousser avec les fessiers, trop d’amplitude, retenir sa respiration.',r:'Amplitude plus petite.',p:'Tenue de 2 s au bout du mouvement.'},
+ shinswitch:{n:'Shin-box switch',c:'Assise au sol, une jambe fléchie devant toi et l’autre fléchie sur le côté, genoux à environ 90°. Fais pivoter les deux genoux pour passer de l’autre côté. Le buste reste droit et immobile : seules les hanches tournent. Phase 1 : mains au sol derrière toi pour te stabiliser. Phases 2 et 3 : mains sur les hanches ou bras croisés, sans appui.',e:'Buste qui tourne avec les hanches, mains qui poussent, genou qui pince.',r:'Version plus facile ou échauffement : mains sur les hanches, buste qui tourne avec les hanches. Ou assise sur un coussin.',p:'Sans appui des mains, plus lent (3 s par mouvement).'},
+ adrock:{n:'Adductor rocks (demi-écart de côté)',c:'Une jambe tendue sur le côté, talon au sol et pointe vers le haut, l’autre jambe fléchie, mains au sol devant toi. Balance lentement le bassin vers l’arrière puis reviens, sans forcer en fin d’amplitude, genou tendu souple.',e:'Dos arrondi, forcer l’amplitude, genou tendu verrouillé.',r:'Jambe tendue moins écartée, mains sur des livres.',p:'Tempo plus lent (3 s par mouvement), puis pause de 2 s en arrière.'},
+ froglift:{n:'Lever de pied en grenouille',c:'En grenouille (quadrupédie, genoux écartés, coussin dessous), reste bas. Soulève un pied ou un tibia du sol, tiens 2 à 3 s, repose. Garde le bas du dos plat.',e:'Cambrer le bas du dos, balancer.',r:'Genoux moins écartés, tenue plus courte.',p:'Tenue plus longue, ou levers plus hauts.'},
+ zlift:{n:'Z-sit : genou et talon qui se soulèvent en alternance',c:'Assise en Z (une jambe fléchie devant, l’autre sur le côté). Soulève le genou, puis le talon, en alternance, sans que le buste bouge ni que la cuisse roule. Contrôle chaque levée.',e:'Buste qui bascule, mouvement trop rapide.',r:'Moins de répétitions, amplitude réduite.',p:'Tenue de 2 s en haut.'},
+ zrot:{n:'Z-sit : rotation interne/externe active de hanche',c:'Assise en Z. Passe lentement la hanche de la rotation externe à la rotation interne, puis reviens (un cycle), en contrôlant l’amplitude, sans t’aider des mains si possible.',e:'Forcer, bassin qui part sur le côté.',r:'Mains au sol, amplitude réduite.',p:'Plus lent, ou pause de 2 s au point de rotation maximal.'},
+ strrot:{n:'Rotations de hanche en straddle',c:'Assise sur un ou deux coussins épais (ou le dos contre un mur), jambes écartées à environ 60°, genoux fléchis à ta guise : c’est voulu, la rotation vient de la hanche, pas de la longueur des ischios. Phase 1 : mains au sol derrière toi, bassin droit (pubis vers le sol, pas basculé vers l’arrière). Fais pivoter les cuisses vers l’intérieur puis vers l’extérieur, genoux et pieds qui suivent, le bassin immobile. Phases 2 et 3 : mains sur les hanches, genoux de moins en moins fléchis.',e:'Bassin qui bascule vers l’arrière, dos arrondi, écart trop large, genoux qui se verrouillent.',r:'Assise plus haute, jambes moins écartées, genoux plus fléchis, amplitude réduite.',p:'Genoux plus tendus (jamais verrouillés), écart plus large, tempo plus lent.'},
+ lungeham:{n:'Fente jambe arrière tendue, pied avant flex',c:'Fente basse, mains au sol de chaque côté, jambe arrière tendue. Tends la jambe avant, pointe du pied avant tirée, puis refléchis le genou avant pour revenir en fente. Lentement, sans pulsations rapides.',e:'Rebonds rapides, dos arrondi.',r:'Mains sur des livres, jambe avant moins tendue.',p:'Tenue de 2 s jambe avant tendue.'},
+ pancakelunge:{n:'Fente latérale pancake',c:'Jambes écartées, jambe tendue sur le côté, mains sur des livres devant toi. Descends en fléchissant l’autre jambe, hanche vers l’arrière, dos long. Quand c’est facile, mains au sol, puis plus bas.',e:'Genou qui rentre, dos arrondi, talon de la jambe fléchie qui décolle.',r:'Mains sur des supports plus hauts, amplitude réduite.',p:'Supports plus bas, puis mains au sol.'},
+ clock:{n:'Horloge sur une jambe',c:'Debout sur une jambe, genou souple, bassin carré. De l’autre pied, touche le sol à 12 h devant toi, puis à 3 h, 6 h et 9 h, sans transférer le poids. Un tour = les 4 touches. Le bassin et le haut du corps restent immobiles.',e:'Bassin qui pivote, genou d’appui verrouillé, poser le pied libre pour s’appuyer.',r:'Touches plus proches, doigts sur un mur.',p:'Pied libre qui ne touche pas le sol, ou yeux fermés.'},
+ wallhalf:{n:'Demi-lune au mur',c:'Dos et fessier de la jambe levée contre un mur, main sur un bloc ou une chaise. Jambe d’appui souple, lève l’autre jambe à l’horizontale, pointe tirée, bassin ouvert sans basculer. Pousse dans tout le pied d’appui.',e:'Genou d’appui verrouillé, jambe levée qui tombe, buste qui s’effondre.',r:'Jambe levée moins haute, bloc plus haut.',p:'Éloigne-toi du mur, puis sans appui de la main.'},
+ treesq:{n:'Arbre, bassin carré',c:'Debout, mains sur les hanches, pied sur le mollet ou la cuisse (jamais sur le genou). Ouvre le genou sans faire tourner le bassin, garde les deux hanches face à toi. Genou d’appui souple, pousse dans tout le pied.',e:'Bassin qui pivote, genou d’appui verrouillé, pied posé sur le genou.',r:'Orteils du pied levé au sol, doigts contre un mur.',p:'Mains jointes au-dessus de la tête, puis yeux fermés.'},
+ dancer:{n:'Danseuse avec sangle',c:'Sangle autour du pied de la jambe arrière, tenue d’une main. Jambe d’appui souple, bassin carré. Lève lentement la jambe arrière en gardant le buste haut, sans te cambrer du bas du dos. Main libre devant ou contre un mur.',e:'Cambrer le bas du dos, genou d’appui verrouillé, tirer sur la sangle.',r:'Plus de sangle, main sur un mur.',p:'Pied plus haut, sangle plus courte.'},
+ pigeonh:{n:'Pigeon actif, charnière du buste',c:'Pigeon carré : jambe avant fléchie, tibia à peu près parallèle à l’avant du tapis, jambe arrière tendue, coussin sous la fesse avant si le bassin penche. Mains derrière la tête, dos droit. Penche-toi en avant vers la jambe avant en pliant au niveau de la hanche, en 3 s, puis remonte, toujours dos droit, mains derrière la tête. Après les 8 répétitions, buste redressé, soulève la cuisse de la jambe arrière du sol 2-3 s, 5 fois, sans creuser le bas du dos.',e:'Dos qui s’arrondit, bassin qui penche d’un côté, genou avant qui pince, descendre par à-coups.',r:'Mains sur les hanches ou devant sur des livres, amplitude plus petite, ou Z-sit si le genou avant pince.',p:'Pause de 2 s en bas, descente plus lente, puis plus bas sans arrondir le dos.'},
+ pigeon:{n:'Pigeon carré actif',c:'À quatre pattes, avance un genou vers la main du même côté, tibia à peu près parallèle à l’avant du tapis, l’autre jambe tendue derrière toi. Coussin sous la fesse de la jambe avant si le bassin penche. Bassin carré, buste redressé. 1) Pousse le tibia avant dans le sol pendant 5 s, à 30-50 % de ton effort ; 2) relâche et avance un peu le buste ; 3) reste 20 s ; deux cycles. Puis, buste redressé, soulève la cuisse de la jambe arrière du sol 2-3 s, 5 fois.',e:'Genou avant qui pince, bassin qui penche d’un côté, creuser le bas du dos, tenir longtemps en passif.',r:'Reste sur le Z-sit, ou pigeon sur le dos (pied contre un mur).',p:'Tibia plus parallèle, buste penché en avant après la contraction, levés de cuisse tenus 5 s.'},
+ hydrant:{n:'Fire hydrant (levé de genou sur le côté)',c:'À quatre pattes, mains sous les épaules, genoux sous les hanches. Garde le genou fléchi à 90° et lève-le sur le côté, sans faire pivoter le bassin ni creuser le bas du dos. Tiens 2 s en haut, redescends en 2 s.',e:'Bassin qui tourne, dos qui se creuse, jambe balancée.',r:'Amplitude plus petite, sans tenue.',p:'Tenue de 3 s, ou petit élastique au-dessus des genoux. Dès la S5 : petit haltère de 1 à 2 kg coincé dans le creux du genou. Le genou se ferme un peu plus que 90°, c’est normal : garde le même angle du début à la fin. Si le creux du genou pince, enroule une serviette autour ou reste sans charge.'},
+ adlift:{n:'Adduction couchée sur le côté',c:'Couchée sur le côté, avant-bras au sol. Plie la jambe du dessus et pose son pied devant la cuisse du dessous (ou sur un coussin). Lève la jambe du dessous tendue, pointe tirée, tiens 2 s, redescends lentement sans la poser. Bassin empilé, sans basculer vers l’arrière.',e:'Bassin qui bascule, jambe qui tourne vers le plafond, mouvement balancé.',r:'Jambe du dessous fléchie, ou levée moins haut.',p:'Tenue de 3 s, ou petit lest à la cheville.'},
+ strcr:{n:'Straddle en contracter-relâcher',c:'Assise jambes écartées à un angle confortable, sur un coussin, mains sur des livres devant toi. Pousse les talons dans le sol pendant 5 s, à 30-50 % de ton effort, comme pour rapprocher les jambes sans les bouger. Relâche, expire et incline le buste un peu plus loin, dos long. Reste 15-20 s. C’est un cycle.',e:'Forcer la contraction, dos arrondi, genoux qui roulent vers l’intérieur.',r:'Jambes moins écartées, coussin plus haut.',p:'Un cycle de plus, ou écartement un peu plus large.'},
+ gmorning:{n:'Pancake « good morning »',c:'En straddle, jambes écartées, genoux vers le plafond, mains sur les hanches. Dos plat, bascule le bassin vers l’avant en inclinant le buste, puis redresse-toi avec la force des hanches. Le mouvement vient des hanches, pas du dos.',e:'Dos arrondi, aller trop vite, forcer l’amplitude.',r:'Jambes moins écartées, mains sur des livres.',p:'Tempo de 3 s par mouvement, ou pause de 2 s en bas. Dès la S5 : haltère de 2 kg tenu contre la poitrine à deux mains, dos plat, le mouvement vient des hanches.'},
+ ystand:{n:'Y debout au mur',c:'Debout près d’un mur, une main sur le mur pour t’équilibrer. Jambe d’appui souple, bassin carré, pousse dans tout le pied. Lève l’autre jambe tendue, pointe tirée, à la hauteur que tu contrôles (devant ou sur le côté, comme pour le Y). Tiens-la avec la main libre au mollet ou sous le genou, ou laisse-la reposer contre le mur. La jambe monte d’abord par ta force : la main stabilise, elle ne tire pas. Respire lentement.',e:'Tirer la jambe avec la main, genou d’appui verrouillé, bassin qui pivote, buste qui s’affaisse, genou de la jambe levée verrouillé.',r:'Jambe moins haute, genou levé légèrement fléchi, ou pied posé sur une chaise.',p:'Tiens la cheville puis le pied, buste plus droit, jambe plus haute, tenue de 20 s. Plus tard, sans la main d’appui au mur.'},
+ marcheplace:{n:'Marche active sur place',c:'Marche sur place en montant les genoux un peu plus haut à chaque pas, bras qui accompagnent, puis moulinets d’épaules. Monte doucement en intensité sur 1 minute.',e:'Démarrer à fond d’un coup, retomber lourdement sur les talons.',r:'Marche normale sur place.',p:'Ajoute de petits rebonds sur la dernière demi-minute.'},
+ ropemime:{n:'Corde à sauter (ou corde imaginaire)',c:'Petits sauts légers sur l’avant-pied, genoux souples, coudes près du corps, les poignets font tourner la corde. Sans corde, mime le geste : mêmes sauts, mains vides. Avec ta vraie corde dès que tu l’as.',e:'Sauter trop haut, genoux verrouillés, réceptions bruyantes sur les talons.',r:'Sans saut : les talons se soulèvent en alternance, ou step-touch rapide.',p:'Un pied puis l’autre en alternance, ou rebonds plus vifs.'},
+ boxing:{n:'Boxe dans le vide',c:'Pieds à largeur d’épaules, genoux souples. Enchaîne directs, crochets et esquives, avec de petits rebonds sur les pieds. La hanche tourne à chaque coup, expire à chaque coup.',e:'Verrouiller le coude en fin de coup (arrête le bras juste avant), rester figée sur les pieds.',r:'Sans déplacement, coups plus lents.',p:'Un petit squat à chaque esquive, ou plus vite.'},
+ skaters:{n:'Skaters (pas chassés en patineuse)',c:'Grand pas sur le côté, reçois le poids sur la jambe qui arrive, genou souple dans l’axe des orteils. L’autre jambe passe derrière toi, bras qui balancent. Alterne de chaque côté.',e:'Genou qui rentre à la réception, bassin qui s’effondre, pas lourds.',r:'Step-touch large sans saut, plus lent.',p:'Pas plus larges avec un petit saut, réception stable tenue 1 s.'},
+ climbers:{n:'Mountain climbers',c:'Appui sur les mains sous les épaules (ou sur une chaise solide), corps aligné, ramène un genou vers la poitrine puis l’autre. Hanches stables, coudes souples.',e:'Bassin qui monte ou qui tombe, coudes verrouillés, poignets qui s’affaissent (pousse dans le sol avec les doigts).',r:'Mains sur une chaise ou un canapé, rythme lent.',p:'Rythme plus rapide, ou genou vers le coude opposé.'},
+ highknees:{n:'Montées de genoux',c:'Debout, monte les genoux à hauteur de hanche en alternance, bras qui accompagnent, buste droit. Réceptions souples sur l’avant-pied.',e:'Buste qui part en arrière, genou d’appui verrouillé, talons qui claquent.',r:'Marche rapide sur place, genoux moins hauts.',p:'Plus vite, ou en avançant puis reculant d’un pas.'},
+ burpeestep:{n:'Burpee sans saut',c:'Debout, pose les mains au sol, recule un pied puis l’autre en planche, reviens un pied puis l’autre, redresse-toi et lève les bras. Aucun saut.',e:'Bassin qui tombe en planche, dos arrondi à la remontée, coudes verrouillés.',r:'Mains sur une chaise ou un canapé (burpee incliné).',p:'Ajoute une pompe inclinée en bas, puis un petit saut en haut avec réception souple.'},
+ stepjack:{n:'Jumping jacks sans impact (step jacks)',c:'Un pied à la fois : ouvre une jambe sur le côté en levant les bras, puis l’autre, puis referme. Les deux pieds ne quittent jamais le sol en même temps.',e:'Bras qui s’arrêtent, genoux verrouillés.',r:'Pas plus petits, bras plus bas.',p:'Vrais jumping jacks avec réception souple, ou petit squat à l’ouverture.'},
+ hollow:{n:'Gainage creux (hollow body)',c:'Allongée sur le dos, bas du dos plaqué au sol. Lève les épaules et les jambes de quelques centimètres, bras le long du corps, et respire. Si le bas du dos décolle, plie les genoux (tuck).',e:'Bas du dos qui se creuse, nuque crispée, retenir sa respiration.',r:'Genoux à 90°, mains sur les cuisses.',p:'Jambes plus tendues, bras au-dessus de la tête, tenue plafonnée à 30 s.'}
+};
+var R=function(id,n,reps,o){var x={id:id,n:n,reps:reps};for(var k in (o||{}))x[k]=o[k];return x;};
+
+// RIR visé par exercice, semaines 1 à 12. Les semaines allégées (S4, S8, S12) restent à 4+.
+// prud = exercices sur une jambe, épaules ou charge portée : on s'arrête avec de la marge, surtout avec ta légère hyperlaxité.
+// std = exercices stables, qui peuvent se rapprocher de l'échec. proche = poussée et tirage appuyés, faciles à contrôler.
+// ctrl = gainage et contrôle : tu t'arrêtes quand la forme se dégrade.
+var RIRP = {
+ prud:['3-4','3','3','4+','3','2-3','2-3','4+','2-3','2','2','4+'],
+ std:['3-4','3','2-3','4+','2-3','2-3','2','4+','2','2','2','4+'],
+ proche:['3-4','3','2-3','4+','2-3','2','2','4+','2','1-2','1-2','4+'],
+ ctrl:['3','3','3','4+','3','3','3','4+','3','2-3','2-3','4+']
+};
+var RIRMAP = {squat1:'prud',bulgare:'prud',rdl1:'prud',ohp:'prud',farmer:'prud',rdl:'std',stepup:'std',bridge1:'std',pushpause:'std',pullover:'prud',row2:'std',row1:'proche',birddog:'ctrl',ytw:'ctrl',extdorsale:'ctrl',plankreach:'ctrl',sideplank:'ctrl',deadbug:'ctrl',pike:'ctrl',lsit:'ctrl'};
+// Charges visées par semaine (issues du bilan de la semaine précédente). Pompes : hauteur d'appui en cm.
+var LOADS = {
+ 3:{squat1:'6',rdl:'10',bulgare:'2',row1:'6',ohp:'5 (sinon reste à 4)',stepup:'6',farmer:'10',pushup:'24',pushpause:'24',pullover:'4',row2:'4'},
+ 5:{squat1:'6',rdl:'12',bulgare:'2',row1:'5',ohp:'4',stepup:'6',farmer:'10',pushup:'24',pushpause:'24',pullover:'5',row2:'4',ytw:'1'},
+ 6:{squat1:'6',rdl:'14',bulgare:'4',bridge1:'6',row1:'5',ohp:'4 (2 séries complètes)',pullover:'6',ytw:'1',stepup:'6',rdl1:'6',farmer:'10',pushup:'24',pushpause:'24',row2:'4'}
+};
+
+var SESS = {
+ A:{name:'Séance A',sub:'Bas du corps, hanches, chaîne postérieure',mins:'~45 min',blocks:[
+  {t:'Échauffement',m:'~8 min',ex:[R('hipcircles',1,'4 cercles/côté',{tempo:'lent'}),R('lungerot',1,'5/côté',{tempo:'2-0-2-0'}),R('clock',2,'2 tours/côté',{tempo:'lent',rest:15})]},
+  {t:'Force',m:'~20 min',force:true,ex:[
+    R('squat1',2,'8/côté',{tempo:'3-1-1-0',rest:75,rir:'3',kg:'kg (1 haltère)',legs:1,main:1,slow:1}),
+    R('rdl',2,'10',{tempo:'4-1-1-0',rest:75,rir:'3',kg:'kg (2 haltères au total)'}),
+    R('bulgare',2,'8/côté',{tempo:'3-0-1-0',rest:75,rir:'3',kg:'kg par haltère',legs:1,main:1,slow:1}),
+    R('bridge1',2,'10/côté',{tempo:'2-0-1-2',rest:45,rir:'3',kg:'kg'}),
+    R('birddog',2,'8/côté',{tempo:'lent, 2 s de tenue',rest:30,rir:'3'})]},
+  {t:'Mobilité active',m:'~12 min',ex:[R('couch',2,'30 s/côté',{tempo:'tenue',rest:15,hold:30}),R('hamcr',2,'3 cycles/côté',{tempo:'5 s contraction, 20 s relâche',rest:15,hold:20}),R('frog',2,'30 s',{tempo:'tenue',rest:15,hold:30}),R('slr',2,'6/côté',{tempo:'2-0-2-3',rest:20})]},
+  {t:'Retour au calme',m:'~3 min',ex:[R('dog',1,'30 s',{tempo:'pédalage lent',hold:30,opt:1}),R('child',1,'6 respirations')]}]},
+ B:{name:'Séance B',sub:'Poussée, tirage, épaules',mins:'~45-50 min',blocks:[
+  {t:'Échauffement',m:'~8 min',ex:[R('wrists',1,'1-2 min',{tempo:'lent',opt:1}),R('shcircles',1,'4/sens/bras',{tempo:'lent'}),R('catcow',1,'6/côté',{tempo:'lent'}),R('dog',1,'30 s',{tempo:'pédalage lent',hold:30,opt:1}),R('wallhalf',2,'15 s/côté',{tempo:'tenue',rest:15,hold:15})]},
+  {t:'Force',m:'~20 min',force:true,ex:[
+    R('pushup',2,'6-8',{tempo:'3-0-1-0',rest:75,rir:'2-3',kg:'hauteur d\'appui, cm',push:1,main:1,slow:1,lower:1}),
+    R('row1',2,'10/côté',{tempo:'2-0-1-1',rest:60,rir:'3',kg:'kg'}),
+    R('pullover',2,'10',{tempo:'3-0-1-1',rest:60,rir:'3',kg:'kg (1 haltère)'}),
+    R('ohp',2,'8',{tempo:'2-0-1-0',rest:75,rir:'3',kg:'kg par haltère'}),
+    R('ytw',1,'1 tour (8 Y + 8 T + 8 W)',{tempo:'1 s de tenue en haut',rest:45,rir:'3',kg:'kg par haltère (0 = sans)'}),
+    R('extdorsale',2,'6 × 5 s',{tempo:'tenue de 5 s en haut',rest:45,rir:'3'}),
+    R('plankreach',2,'6/côté',{tempo:'2 s de tenue en haut',rest:45,rir:'3',core:1})]},
+  {t:'Mobilité active',m:'~12 min',ex:[R('wallangel',2,'8',{tempo:'2 s de tenue en haut',rest:20}),R('lats',2,'3 cycles',{tempo:'5 s contraction, 20 s relâche',rest:15,hold:75}),R('priere',2,'8 respirations',{tempo:'lent',rest:20,hold:40,alt:{w:5,id:'pontsurelev',reps:'5 × 5 s',tempo:'5 s de tenue'}})]},
+  {t:'Retour au calme',m:'~3 min',ex:[R('resp',1,'6 respirations')]}]},
+ C:{name:'Séance C',sub:'Full body, équilibres, gainage, écarts',mins:'~55-60 min',blocks:[
+  {t:'Échauffement et équilibres',m:'~12 min',ex:[R('wrists',1,'1-2 min',{tempo:'lent',opt:1}),R('sunsal',1,'2 tours lents',{tempo:'1 mouvement par respiration',opt:1}),R('cars',1,'4/côté',{tempo:'lent'}),R('deepsquat',1,'30 s',{hold:30}),R('unieyes',2,'20 s/côté',{tempo:'tenue',rest:15,hold:20}),R('crow',2,'5 s',{tempo:'tenue',rest:30,hold:5})]},
+  {t:'Force',m:'~25 min',force:true,ex:[
+    R('stepup',2,'8/côté',{tempo:'2-0-1-0',rest:60,rir:'3',kg:'kg par haltère'}),
+    R('rdl1',2,'8/côté',{tempo:'3-1-1-0',rest:60,rir:'3',kg:'kg'}),
+    R('pushpause',2,'5',{tempo:'3-2-1-0',rest:75,rir:'2-3',kg:'hauteur d\'appui, cm',lower:1}),
+    R('row2',2,'10',{tempo:'2-0-1-1',rest:60,rir:'3',kg:'kg par haltère'}),
+    R('farmer',2,'30 s',{tempo:'marche lente',rest:45,kg:'kg par haltère',hold:30}),
+    R('sideplank',2,'8/côté',{tempo:'2 s de tenue en haut',rest:30,rir:'3'}),
+    R('deadbug',2,'8/côté',{tempo:'4 s par mouvement',rest:30,rir:'3'}),
+    R('pike',2,'6',{tempo:'2 s de tenue en haut',rest:30,rir:'3'}),
+    R('lsit',2,'10 s',{tempo:'tenue',rest:45,rir:'3',hold:10})]},
+  {t:'Mobilité active',m:'~14 min',ex:[R('halfsplit',2,'3 cycles/côté',{tempo:'5 s contraction, 20 s relâche',rest:15,hold:20}),R('pancake',2,'30 s + 5 relevés',{tempo:'tenue',rest:15,hold:30}),R('cossack',2,'6/côté',{tempo:'3-1-1-0',rest:20,kg:'kg (haltère en gobelet, 0 = sans)',alt:[{w:5,id:'pancakelunge',reps:'10-12/côté',tempo:'lent',kg:''},{w:9,id:'cossack',reps:'6/côté',tempo:'3-1-1-0'}]}),R('bridgearms',2,'20 s',{tempo:'tenue',rest:20,hold:20}),R('sphinx',2,'6/côté',{tempo:'2 s de tenue',rest:20})]},
+  {t:'Retour au calme',m:'~3 min',ex:[R('twist',1,'6 respirations/côté'),R('moonsal',1,'2 tours lents',{tempo:'1 mouvement par respiration',opt:1})]}]},
+ M:{name:'Mini-mobilité',sub:'Un seul tour, intensité 6/10, jamais de douleur',mins:'15-20 min',blocks:[
+  {t:'Circuit (15 s de transition)',m:'1 tour',ex:[R('hipcircles',1,'5/côté',{tempo:'lent'}),R('couch',1,'45 s/côté',{tempo:'tenue',hold:45}),R('pigeonh',1,'8/côté + 5 levés de cuisse arrière',{tempo:'descente 3 s, dos droit, mains derrière la tête ; levés tenus 2-3 s'}),R('lungeham',1,'8/côté',{tempo:'lent, sans pulsations'}),R('halfsplit',1,'3 cycles/côté',{tempo:'5 s contraction, 20 s relâche',hold:20}),R('pancake',1,'45 s + 5 relevés',{tempo:'tenue',hold:45}),R('cossack',1,'6/côté',{tempo:'3-1-1-0'}),R('wallangel',1,'8',{tempo:'2 s en haut'}),R('sphinx',1,'6/côté',{tempo:'2 s de tenue'}),R('dog',1,'30 s',{tempo:'pédalage lent',hold:30,opt:1}),R('treesq',1,'20-30 s/côté',{tempo:'tenue',hold:30}),R('dancer',1,'3 respirations/côté',{tempo:'lent'}),R('ystand',1,'10-15 s/côté',{tempo:'tenue',hold:15}),R('moonsal',1,'2 tours lents',{tempo:'1 mouvement par respiration',opt:1})]}]},
+ R:{name:'Remplacement du tissu',sub:'Facultatif. Si tu es fatiguée, saute-la.',mins:'~30 min',blocks:[
+  {t:'Tirage léger',m:'~10 min',ex:[R('ytw',1,'1 tour (8 Y + 8 T + 8 W)',{tempo:'1 s de tenue en haut'}),R('row1',2,'10/côté',{tempo:'2-0-1-1',rest:60,rir:'4+',kg:'kg'})]},
+  {t:'Mobilité active des écarts',m:'15-20 min',ex:[R('sunsal',1,'2 tours lents',{tempo:'1 mouvement par respiration',opt:1}),R('halfsplit',2,'3 cycles/côté',{tempo:'5 s contraction, 20 s relâche',rest:15,hold:20}),R('pancake',2,'30 s + 5 relevés',{tempo:'tenue',rest:15,hold:30}),R('frog',2,'30 s',{tempo:'tenue',rest:15,hold:30}),R('slr',2,'6/côté',{tempo:'2-0-2-3',rest:20}),R('dog',1,'30 s',{tempo:'pédalage lent',hold:30,opt:1})]}]}
+};
+SESS.N={name:'Mini-mobilité du mercredi',sub:'Circuit de rotation de hanches, force active, puis compression d’écart',mins:'~18 min',blocks:[
+  {t:'Bassin et hanches',m:'~2 min',ex:[R('pelvtilt',1,'8',{tempo:'lent'}),R('hipcircles',1,'4 cercles/côté',{tempo:'lent',alt:[{w:5,reps:'5 cercles/côté'},{w:9,reps:'5 cercles/côté',tempo:'3 s par cercle'}]})]},
+  {t:'Circuit de hanches (un seul tour)',m:'~11 min',ex:[
+    R('shinswitch',1,'6-7/côté',{tempo:'lent, mains derrière',alt:[{w:5,reps:'10/côté',tempo:'lent, mains sur les hanches ou bras croisés'},{w:9,reps:'10/côté',tempo:'3 s par mouvement, sans appui'}]}),
+    R('adrock',1,'8/côté',{tempo:'lent',alt:[{w:5,reps:'8/côté',tempo:'lent et contrôlé'},{w:9,reps:'8/côté',tempo:'3 s par mouvement'}]}),
+    R('froglift',1,'5-8/côté',{tempo:'tenue de 2-3 s'}),
+    R('hydrant',1,'6-8/côté',{tempo:'tenue de 2 s',alt:[{w:5,reps:'10/côté',kg:'kg (haltère dans le creux du genou, 0 = sans)'},{w:9,reps:'10/côté',tempo:'tenue de 3 s',kg:'kg (haltère dans le creux du genou, 0 = sans)'}]}),
+    R('zlift',1,'6-7/côté',{tempo:'lent',alt:[{w:5,reps:'10/côté',tempo:'lent et contrôlé'},{w:9,reps:'10/côté',tempo:'3 s par mouvement'}]}),
+    R('zrot',1,'3 cycles/jambe',{tempo:'lent',alt:[{w:5,reps:'5 cycles/jambe',tempo:'lent et contrôlé'},{w:9,reps:'5 cycles/jambe',tempo:'3 s par mouvement'}]}),
+    R('strrot',1,'6-7/jambe',{tempo:'lent, assise sur coussins, genoux fléchis, mains derrière',alt:[{w:5,reps:'10/jambe',tempo:'lent, mains sur les hanches, genoux souples'},{w:9,reps:'10/jambe',tempo:'3 s par mouvement, genoux de moins en moins fléchis'}]}),
+    R('adlift',1,'6-8/côté',{tempo:'tenue de 2 s',alt:[{w:5,reps:'10/côté'},{w:9,reps:'10/côté',tempo:'tenue de 3 s'}]})]},
+  {t:'Compression d’écart',m:'~5 min',ex:[R('frog',1,'30 s',{tempo:'tenue',hold:30}),R('gmorning',1,'8',{tempo:'lent',alt:[{w:5,reps:'10',tempo:'lent',kg:'kg (haltère contre la poitrine, 0 = sans)'},{w:9,reps:'10',tempo:'3 s par mouvement',kg:'kg (haltère contre la poitrine, 0 = sans)'}]}),R('pancake',1,'45 s + 5 relevés',{tempo:'tenue',hold:45})]}]};
+SESS.X={name:'Bonus écarts',sub:'Option, juste après la danse ou le tissu, muscles chauds',mins:'5-8 min',blocks:[{t:'Les deux mouvements, une série chacun',m:'5-8 min',ex:[R('halfsplit',1,'3 cycles/côté',{tempo:'5 s contraction, 20 s relâche',rest:15,hold:20}),R('pancake',1,'30 s + 5 relevés',{tempo:'tenue',rest:15,hold:30})]}]};
+SESS.W={name:'Marche rapide',sub:'Option, les jours sans force',mins:'25-30 min',blocks:[{t:'Marche à allure soutenue',m:'25-30 min',ex:[R('walk',1,'25 min',{tempo:'tu parles mais tu ne chantes pas',hold:1500})]}]};
+// Cardio du lundi : 2 tours de 7 exercices (S5-S8 : 30 s d'effort, 30 s de repos ; S9-S12 : 40 s / 20 s), 1 tour en semaine allégée
+var CAR=function(id){return R(id,2,'30 s',{tempo:'effort soutenu, phrases courtes',rest:30,hold:30,dlr:1,alt:[{w:9,reps:'40 s',rest:20,hold:40}]});};
+SESS.L={name:'Cardio du lundi',sub:'Intervalles, gainage et dos. Le matin ou à midi, avant la danse du soir',mins:'30 min',blocks:[
+  {t:'Échauffement',m:'~4 min',ex:[R('marcheplace',1,'1 min',{tempo:'montée progressive',hold:60}),R('hipcircles',1,'4 cercles/côté',{tempo:'lent'}),R('shcircles',1,'4/sens/bras',{tempo:'lent'}),R('catcow',1,'6/côté',{tempo:'lent'})]},
+  {t:'Cardio par intervalles, 2 tours',m:'~14 min',ex:[CAR('ropemime'),CAR('boxing'),CAR('skaters'),CAR('climbers'),CAR('highknees'),CAR('burpeestep'),CAR('stepjack')]},
+  {t:'Gainage et dos, un seul tour',m:'~8 min',force:true,ex:[R('deadbug',1,'6/côté',{tempo:'4 s par mouvement',rir:'3'}),R('birddog',1,'6/côté',{tempo:'lent, 2 s de tenue',rir:'3'}),R('sideplank',1,'6/côté',{tempo:'2 s de tenue en haut',rir:'3'}),R('extdorsale',1,'6 × 5 s',{tempo:'tenue de 5 s en haut',rir:'3'}),R('hollow',1,'15-20 s',{tempo:'tenue',rir:'3',hold:20})]},
+  {t:'Retour au calme',m:'~4 min',ex:[R('child',1,'6 respirations'),R('twist',1,'6 respirations/côté'),R('resp',1,'6 respirations')]}]};
+var SORDER=['A','B','C','L','N','M','R','X','W'];
+var SCHIP={A:'A',B:'B',C:'C',L:'Cardio lundi',N:'Mini-mob. mercredi',M:'Mini-mob. dimanche',R:'Remplacement',X:'Bonus écarts',W:'Marche rapide'};
+
+// Tests : v = valeur S0 (null = à faire), b = +1 plus haut = mieux, -1 plus bas = mieux
+var TESTS = [
+ {id:'t_pi',cat:'Force',l:'Pompes inclinées max (note la hauteur d\'appui)',u:'répétitions',b:1,v:10},
+ {id:'t_ps',cat:'Force',l:'Pompes strictes max (sur les pieds)',u:'répétitions',b:1,v:4},
+ {id:'t_ch',cat:'Force',l:'Charge du squat sur une jambe vers une chaise : 8 répétitions propres par côté',u:'kg (haltère contre la poitrine, tempo 3-1-1-0)',b:1,v:null},
+ {id:'t_s1d',cat:'Force',l:'Squat sur une jambe vers une chaise, droite',u:'répétitions (plafond 20, note la hauteur de la chaise)',b:1,v:14},
+ {id:'t_s1g',cat:'Force',l:'Squat sur une jambe vers une chaise, gauche',u:'répétitions (plafond 20, note la hauteur de la chaise)',b:1,v:14},
+ {id:'t_hc',cat:'Force',l:'Tenue creuse (hollow body) : lombaires plaquées, jambes tendues',u:'secondes (plafond 45, genoux pliés si trop dur)',b:1,v:null},
+ {id:'t_pld',cat:'Force',l:'Planche latérale, droite',u:'secondes (plafond 60)',b:1,v:60},
+ {id:'t_plg',cat:'Force',l:'Planche latérale, gauche',u:'secondes (plafond 60)',b:1,v:60},
+ {id:'t_eqd',cat:'Force',l:'Équilibre unipodal yeux fermés, droite',u:'secondes (plafond 60)',b:1,v:45},
+ {id:'t_eqg',cat:'Force',l:'Équilibre unipodal yeux fermés, gauche',u:'secondes (plafond 60)',b:1,v:45},
+ {id:'t_ext',cat:'Force',l:'Tenue en extension dorsale',u:'secondes',b:1,v:60},
+ {id:'t_pb',cat:'Force',l:'Planche avec levé de bras alterné, par côté',u:'répétitions',b:1,v:null},
+ {id:'t_pk',cat:'Force',l:'Relevés de jambes tendues assise (pike lifts)',u:'répétitions',b:1,v:null},
+ {id:'t_ls',cat:'Force',l:'L-sit en tuck sur blocs',u:'secondes',b:1,v:null},
+ {id:'t_ecd',cat:'Force',l:'Équilibre unipodal yeux fermés sur coussin, droite',u:'secondes (plafond 60)',b:1,v:null},
+ {id:'t_ecg',cat:'Force',l:'Équilibre unipodal yeux fermés sur coussin, gauche',u:'secondes (plafond 60)',b:1,v:null},
+ {id:'t_eld',cat:'Souplesse',l:'Écart latéral, jambe droite devant : bassin-sol',u:'cm',b:-1,v:18},
+ {id:'t_elg',cat:'Souplesse',l:'Écart latéral, jambe gauche devant : bassin-sol',u:'cm',b:-1,v:18},
+ {id:'t_efp',cat:'Souplesse',l:'Écart facial : distance entre les pieds',u:'cm',b:1,v:142},
+ {id:'t_efs',cat:'Souplesse',l:'Écart facial : poitrine-sol',u:'cm',b:-1,v:21},
+ {id:'t_or',cat:'Souplesse',l:'Toucher d\'orteils debout : doigts-sol',u:'cm',b:-1,v:0},
+ {id:'t_sp',cat:'Souplesse',l:'Squat profond : durée de tenue',u:'secondes',b:1,v:null},
+ {id:'t_wa',cat:'Souplesse',l:'Wall angels lents : répétitions propres',u:'répétitions',b:1,v:null},
+ {id:'t_em',cat:'Souplesse',l:'Flexion d\'épaule au mur : poignets-mur',u:'cm (0 en S0, plafonné)',b:-1,v:0},
+ {id:'t_po',cat:'Souplesse',l:'Pont : mains-pieds (si tenté, échauffée, sans forcer)',u:'cm',b:-1,v:null},
+ {id:'t_sf',cat:'Souplesse',l:'Sphinx, pied vers la tête : pied-tête',u:'cm',b:-1,v:99}
+];
+var TCOLS=['S0','S4','S8','S12'];
+// Tests plafonnés au bilan S4 : on garde S0 et S4, on les retire de S8 et S12 (valeur = dernière semaine de test conservée)
+var T_END={t_pld:4,t_plg:4,t_eqd:4,t_eqg:4,t_sp:4,t_em:4,t_or:4};
+
+// Planning : semaine normale
+var STD = {1:{k:'dance',t:'Danse (soir)',hint:'Le matin ou à midi : séance cardio L de 30 min. Option après le cours : bonus écarts de 5 à 8 min, muscles chauds.'},2:{k:'A'},3:{k:'N'},4:{k:'tissu',t:'Tissu (midi)',hint:'Option : bonus écarts de 5 à 8 min juste après la séance, muscles chauds.'},5:{k:'B'},6:{k:'C'},0:{k:'M'}};
+// Exceptions des vacances scolaires
+var OVR = {
+ '2026-10-19':{k:'free',t:'Libre (pas de danse)',s:'A',hint:'Pas de danse ce lundi : séance A possible, sinon mardi.'},
+ '2026-10-26':{k:'A'},
+ '2026-10-27':{k:'M'},
+ '2026-10-28':{k:'B'},
+ '2026-10-29':{k:'R',hint:'Pas de tissu cette semaine. Séance de remplacement, facultative.'},
+ '2026-10-30':{k:'rest',t:'Repos'},
+ '2026-10-31':{k:'C'},
+ '2026-11-01':{k:'M'},
+ '2026-11-23':{k:'dance',t:'Danse (soir)',hint:'Après le cours, muscles chauds : mini-mobilité du dimanche, déplacée ici (onglet Séance, « Mini-mob. dimanche »). Midi, option : marche rapide de 25 min (6 km/h, sac de 4 kg). Pas de séance L cette semaine.'},
+ '2026-11-25':{k:'B',hint:'Puis la mini-mobilité du mercredi (onglet Séance, « Mini-mob. mercredi »), dans la foulée ou plus tard dans la journée.'},
+ '2026-11-27':{k:'C',hint:'Vise environ 50 min : saute les options si tu es fatiguée. Planche latérale : tenue plus courte, ou genou du bas posé.'},
+ '2026-11-28':{k:'rest',t:'Repos',hint:'Week-end pris : pas de séance.'},
+ '2026-11-29':{k:'rest',t:'Repos',hint:'Week-end pris : pas de séance.'}
+};
+var VAC = {1:'Vacances : pas de danse lundi. Séance A lundi ou mardi. Si tu la fais lundi, décale la mini-mobilité au mardi.',2:'Vacances : ni danse ni tissu. Séances espacées de 48 h, remplacement du tissu jeudi (facultatif).'};
+
+/* ================= Utilitaires ================= */
+function $(s,r){return (r||document).querySelector(s);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function pad(n){return n<10?'0'+n:''+n;}
+function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function strip(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+function addDays(d,n){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);return x;}
+function weekOf(d){var diff=Math.round((strip(d)-START)/864e5);if(diff<0)return 0;return Math.floor(diff/7)+1;}
+function weekMon(w){return addDays(START,(w-1)*7);}
+function wRow(w){if(w<1)return W[1];if(w>12)return W[12];return W[w];}
+// Variante d'exercice selon la semaine : ex.alt = {w:semaine de bascule, id, reps, tempo...}
+function exFor(ex,w){if(!ex.alt)return ex;var alts=Array.isArray(ex.alt)?ex.alt:[ex.alt],pick=null,i;for(i=0;i<alts.length;i++){if(w>=alts[i].w)pick=alts[i];}if(!pick)return ex;var x={},k;for(k in ex)x[k]=ex[k];for(k in pick)x[k]=pick[k];delete x.alt;if(pick.hold===undefined)delete x.hold;return x;}
+function planFor(d){
+  var key=ymd(d), o=OVR[key], dow=d.getDay();
+  var base=o||STD[dow];
+  var k=base.k;
+  var out={k:k,date:key,hint:base.hint||'',sess:null,title:'',sub:''};
+  if(SESS[k]){out.sess=k;out.title=SESS[k].name;out.sub=SESS[k].sub;}
+  else if(k==='free'){out.sess=base.s;out.title=base.t;out.sub='Séance A possible';}
+  else {out.title=base.t;out.sub='Rien de prévu au programme';}
+  return out;
+}
+var QUOTA={A:1,B:1,C:1,M:2,L:1};
+function sessCat(s){return s==='N'?'M':s;}
+function weekCounts(w){var c={A:0,B:0,C:0,M:0,L:0};finishedInWeek(w).forEach(function(l){var k=sessCat(l.sess);if(c[k]!=null)c[k]++;});return c;}
+function doneSessOn(key){var out=[];Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.date===key&&l.fin&&SESS[l.sess])out.push(l.sess);});out.sort();return out;}
+function doneLine(key,p){var ds=doneSessOn(key);if(!ds.length)return '';var pc=p.sess?sessCat(p.sess):null;var other=ds.filter(function(s){return sessCat(s)!==pc;});if(!other.length)return '';return '<div class="small" style="color:var(--ok);font-weight:600">Fait : '+other.map(function(s){return esc(SESS[s].name);}).join(', ')+(pc?' (prévu : '+esc(SESS[p.sess].name)+')':'')+'</div>';}
+function doneCode(key,pl){var codes=[],ak=pl.k==='dance'?'D':(pl.k==='tissu'?'T':null);if(ak&&actDone(key,ak))codes.push(ak);doneSessOn(key).forEach(function(s){if('ABCNMRL'.indexOf(s)>=0)codes.push(s==='N'?'M':s);});return codes.length?codes.join('+'):'✓';}
+function weekChecklist(w){if(w<1||w>12)return '';var c=weekCounts(w),items=[['A','A'],['B','B'],['C','C'],['M','Mini-mobilité'],['L','Cardio lundi']];return '<p class="small" style="margin-top:2px"><b>Séances de la semaine :</b> '+items.map(function(it){var q=QUOTA[it[0]],n=Math.min(c[it[0]],q);return (n>=q?'✓ ':'')+it[1]+(q>1?' '+n+'/'+q:'');}).join(' · ')+'</p>';}
+function dayCode(p){
+  if(p.k==='A'||p.k==='B'||p.k==='C')return p.k;
+  if(p.k==='M'||p.k==='N')return 'M';
+  if(p.k==='R')return 'R';
+  if(p.k==='dance')return 'D';
+  if(p.k==='tissu')return 'T';
+  if(p.k==='free')return 'A?';
+  return '·';
+}
+function numv(x){var n=parseFloat(String(x).replace(',','.'));return isFinite(n)?n:null;}
+function fmt(n){return (Math.round(n*10)/10).toString().replace('.',',');}
+function longDate(d){return DAYS[d.getDay()]+' '+d.getDate()+' '+['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][d.getMonth()];}
+
+function actDone(ds,k){return !!(state.act&&state.act[ds]&&state.act[ds][k]);}
+function badgeFor(p,key,dn){
+  if(p.k==='dance'||p.k==='tissu'){
+    var ak=p.k==='dance'?'D':'T', ad=actDone(key,ak);
+    return '<button type="button" class="badge'+(ad?' ok':'')+'" style="border:0;min-height:36px;padding:3px 12px" data-act="actt" data-d="'+key+'" data-k="'+ak+'" aria-pressed="'+(ad?'true':'false')+'">'+(ad?'Faite ✓':'À valider')+'</button>';
+  }
+  return '<span class="badge'+(dn?' ok':'')+'">'+(dn?'Faite':esc(dayCode(p)))+'</span>';
+}
+
+/* ================= État et sauvegarde ================= */
+var LS='kora12w-v1';
+var state={v:1,updatedAt:0,log:{},tests:{},steps:{},dnotes:{},act:{}};
+try{var raw=localStorage.getItem(LS);if(raw){var p=JSON.parse(raw);if(p&&p.v===1)state=p;}}catch(e){}
+if(!state.steps)state.steps={};
+if(!state.dnotes)state.dnotes={};
+if(!state.act)state.act={};
+var ui={tab:'today',wk:null,sess:null,date:ymd(new Date()),finish:false,sync:'local'};
+
+function saveLocal(){try{localStorage.setItem(LS,JSON.stringify(state));}catch(e){}}
+function save(){
+  state.updatedAt=Date.now();
+  saveLocal();
+}
+function paintSync(el){el.textContent='Sauvegarde';el.className='sync';}
+function setSync(){}
+function stamp(){var d=new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function backupFile(){
+  var txt=JSON.stringify(state);
+  return {txt:txt,name:'programme-12-semaines-'+stamp()+'.json'};
+}
+function syncInfo(){
+  var n=$('#syncNote');
+  if(n){n.remove();return;}
+  n=document.createElement('div');n.id='syncNote';n.className='note';
+  n.innerHTML='<p>Ton suivi est enregistré sur ce téléphone, dans l\'appli. Fais une sauvegarde de temps en temps, surtout avant de changer de téléphone ou d\'effacer les données du navigateur.</p>'
+   +'<div class="row wrap"><button type="button" class="btn small" data-act="bk-export">Enregistrer un fichier</button><button type="button" class="btn ghost small" data-act="bk-copy">Copier le texte</button><button type="button" class="btn ghost small" data-act="bk-file">Restaurer un fichier</button></div>'
+   +'<input type="file" id="bkFile" accept=".json,application/json" hidden>'
+   +'<textarea id="bkText" placeholder="Ou colle ici une sauvegarde, puis touche Restaurer le texte." aria-label="Texte de sauvegarde"></textarea>'
+   +'<div class="row wrap"><button type="button" class="btn ghost small" data-act="bk-paste">Restaurer le texte</button></div>'
+   +'<p id="bkMsg" class="small muted" role="status"></p>';
+  var top=$('.top');top.parentNode.insertBefore(n,top.nextSibling);
+  $('#bkFile').addEventListener('change',function(e){
+    var f=e.target.files&&e.target.files[0];if(!f)return;
+    var r=new FileReader();r.onload=function(){restoreFrom(String(r.result));};r.readAsText(f);e.target.value='';
+  });
+}
+function bkMsg(s){var m=$('#bkMsg');if(m)m.textContent=s;}
+function restoreFrom(txt){
+  var d;
+  try{d=JSON.parse(txt);}catch(e){bkMsg('Ce texte n\'est pas une sauvegarde valide.');return;}
+  if(!d||d.v!==1||typeof d.log!=='object'){bkMsg('Ce n\'est pas une sauvegarde de ce programme.');return;}
+  try{localStorage.setItem(LS+'-avant-restauration',JSON.stringify(state));}catch(e){}
+  state={v:1,updatedAt:Date.now(),log:d.log||{},tests:d.tests||{},steps:d.steps||{},dnotes:d.dnotes||{},act:d.act||{}};
+  saveLocal();render();
+  var nb=Object.keys(state.log).length;
+  var old=$('#syncNote');if(old)old.remove();
+  var n=document.createElement('p');n.className='note';n.id='syncNote';
+  n.textContent='Sauvegarde restaurée : '+nb+' séance'+(nb>1?'s':'')+' retrouvée'+(nb>1?'s':'')+'.';
+  var top=$('.top');top.parentNode.insertBefore(n,top.nextSibling);
+}
+function doExport(){
+  var b=backupFile();
+  try{
+    var file=new File([b.txt],b.name,{type:'application/json'});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      navigator.share({files:[file],title:'Sauvegarde du programme'}).then(function(){bkMsg('Sauvegarde partagée.');},function(){});
+      return;
+    }
+  }catch(e){}
+  try{
+    var url=URL.createObjectURL(new Blob([b.txt],{type:'application/json'}));
+    var a=document.createElement('a');a.href=url;a.download=b.name;document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(url);a.remove();},1500);
+    bkMsg('Fichier enregistré : '+b.name);
+  }catch(e){bkMsg('Enregistrement impossible. Utilise « Copier le texte ».');}
+}
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(e){}
+
+/* ================= Calculs de séance ================= */
+function resolve(ex,block,w){
+  var r=wRow(w), n=ex.n, reps=ex.reps, tempo=ex.tempo||'', rir=ex.rir||'';
+  if(ex.legs)reps=r.legs+'/côté';
+  if(ex.push)reps=r.push;
+  if(ex.core)reps=r.core+'/côté';
+  if(ex.slow&&r.tempo.charAt(0)==='4'&&tempo.charAt(0)==='3')tempo='4'+tempo.slice(1);
+  if(ex.main&&!ex.push&&r.rir)rir=r.rir;
+  if(ex.push&&r.rir)rir=r.rir;
+  if(block.force&&RIRMAP[ex.id]){rir=RIRP[RIRMAP[ex.id]][Math.max(1,Math.min(12,w))-1];}
+  if(block.force){ if(r.dl){if(n>1)n=1;rir='4+';} }
+  if(ex.dlr&&r.dl&&n>1)n=1;
+  return {n:n,reps:reps,tempo:tempo,rir:rir,rest:ex.rest};
+}
+function getLog(date,sess,create){
+  var k=date+'_'+sess;
+  if(!state.log[k]&&create){state.log[k]={date:date,sess:sess,week:weekOf(new Date(date+'T12:00:00')),sets:{},loads:{},fin:false};}
+  return state.log[k];
+}
+function lastLoad(exId,beforeDate){
+  var best=null;
+  Object.keys(state.log).forEach(function(k){
+    var l=state.log[k];
+    if(l.loads&&l.loads[exId]!=null&&l.loads[exId]!==''&&l.date<beforeDate){ if(!best||l.date>best.date)best={date:l.date,v:l.loads[exId]}; }
+  });
+  return best;
+}
+function finishedInWeek(w){
+  var out=[];
+  Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.fin&&l.week===w)out.push(l);});
+  out.sort(function(a,b){return a.date<b.date?-1:1;});
+  return out;
+}
+
+/* ================= Minuteur ================= */
+var timer=null, tick=null, audioCtx=null;
+function beep(){
+  try{
+    audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+    var t=audioCtx.currentTime;
+    [0,0.25,0.5].forEach(function(o){var osc=audioCtx.createOscillator(),g=audioCtx.createGain();osc.frequency.value=o===0.5?1100:880;g.gain.value=0.15;osc.connect(g);g.connect(audioCtx.destination);osc.start(t+o);osc.stop(t+o+0.18);});
+  }catch(e){}
+  try{if(navigator.vibrate)navigator.vibrate([200,100,200]);}catch(e){}
+}
+function startTimer(sec,label){
+  try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(e){}
+  timer={end:Date.now()+sec*1000,label:label,done:false};
+  clearInterval(tick);tick=setInterval(paintTimer,250);paintTimer();
+}
+function stopTimer(){timer=null;clearInterval(tick);var el=$('#timer');el.hidden=true;}
+function paintTimer(){
+  var el=$('#timer');
+  if(!timer){el.hidden=true;return;}
+  var left=Math.ceil((timer.end-Date.now())/1000);
+  if(left<=0&&!timer.done){timer.done=true;beep();}
+  var over=left<=0;
+  el.hidden=false;el.className=over?'end':'';
+  var s=Math.abs(Math.max(left,0));
+  el.innerHTML='<div class="in-bar"><div class="t">'+pad(Math.floor(s/60))+':'+pad(s%60)+'</div><div class="l">'+(over?'C\'est fini. ':'')+esc(timer.label)+'</div>'+(over?'':'<button data-act="t+" aria-label="Ajouter 15 secondes">+15 s</button>')+'<button data-act="tx" aria-label="Fermer le minuteur">'+(over?'OK':'Stop')+'</button></div>';
+}
+
+/* ================= Rendu ================= */
+var ICON={
+ today:'<svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>',
+ weeks:'<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',
+ sess:'<svg viewBox="0 0 24 24"><path d="M6.5 7v10M17.5 7v10M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg>',
+ log:'<svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M21 19H3"/></svg>',
+ tests:'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>',
+ guide:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8v.2"/></svg>'
+};
+var TABS=[['today','Jour'],['weeks','Semaines'],['sess','Séance'],['log','Suivi'],['tests','Tests'],['guide','Repères']];
+function renderTabs(){
+  $('#tabs').innerHTML=TABS.map(function(t){return '<button data-tab="'+t[0]+'"'+(ui.tab===t[0]?' aria-current="page"':'')+'>'+ICON[t[0]]+'<span>'+t[1]+'</span></button>';}).join('');
+}
+function header(sub){
+  var now=new Date();
+  return '<div class="top"><div><h1>Programme 12 semaines</h1><p class="date">'+esc(sub||longDate(now))+'</p></div><button id="sync" class="sync" type="button" data-act="syncinfo"></button></div>';
+}
+function render(){
+  renderTabs();
+  var f={today:vToday,weeks:vWeeks,sess:vSess,log:vLog,tests:vTests,guide:vGuide}[ui.tab]||vToday;
+  $('#app').innerHTML=header()+f();
+  var s=$('#sync');if(s)paintSync(s);
+}
+
+function vWeeks(){
+  var now=new Date(), real=weekOf(now), cw=Math.max(1,Math.min(12,real||1));
+  var w=ui.wk||cw, r=W[w], mon=weekMon(w), sun=addDays(mon,6);
+  var MO=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  function dm(d){return d.getDate()+' '+MO[d.getMonth()];}
+  var h='<section class="card"><div class="row"><button class="btn ghost small" data-act="wk" data-w="'+(w-1)+'"'+(w<=1?' disabled':'')+' aria-label="Semaine précédente">‹</button><div class="grow" style="text-align:center"><h2 class="title" style="font:800 22px/1.1 var(--f-display);text-transform:none;letter-spacing:-.01em;color:var(--ink)">Semaine '+w+'</h2><p class="small muted">'+dm(mon)+' au '+dm(sun)+'</p></div><button class="btn ghost small" data-act="wk" data-w="'+(w+1)+'"'+(w>=12?' disabled':'')+' aria-label="Semaine suivante">›</button></div><div class="row wrap" style="justify-content:center"><span class="badge">'+esc(r.p)+'</span>'+(w===real?'<span class="badge ok">En cours</span>':'')+(r.dl?'<span class="badge warn">Allégée et tests</span>':'')+'</div></section>';
+  h+='<section class="card"><h2>Cibles</h2><div class="target"><div><b class="num">'+r.n+'</b><span>série'+(r.n>1?'s':'')+' par exercice</span></div><div><b class="num">'+esc(r.legs)+'</b><span>jambes, par côté</span></div><div><b class="num">'+esc(r.push)+'</b><span>pompes inclinées</span></div><div><b class="num">'+esc(r.tempo)+'</b><span>tempo des jambes</span></div><div><b class="num">'+esc(r.rir)+'</b><span>RIR de référence</span></div><div><b class="num">'+r.core+'</b><span>gainage, reps/côté</span></div></div><p class="small muted">Mobilité : '+esc(r.amp)+'.</p>'+(r.note?'<p class="note">'+esc(r.note)+'</p>':'')+(VAC[w]?'<p class="note warn">'+esc(VAC[w])+'</p>':'')+'</section>';
+  h+='<section class="card"><h2>Planning</h2>';
+  for(var i=0;i<7;i++){
+    var d=addDays(mon,i), p=planFor(d), key=ymd(d), dn=false;
+    Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.date===key&&l.fin)dn=true;});
+    h+='<div class="pl"><b class="num">'+DSHORT[d.getDay()]+' '+d.getDate()+'</b><div><div'+(key===ymd(now)?' style="font-weight:700;color:var(--accent)"':'')+'>'+esc(p.title)+'</div>'+(p.hint?'<div class="small muted">'+esc(p.hint)+'</div>':'')+doneLine(key,p)+'</div>'+badgeFor(p,key,dn)+'</div>';
+  }
+  h+='</section>';
+  h+='<section class="card"><h2>Les 12 semaines</h2>';
+  for(var j=1;j<=12;j++){var x=W[j];h+='<button class="wlist'+(j===w?' sel':'')+'" data-act="wk" data-w="'+j+'"><b class="num">S'+j+'</b><span>'+esc(x.p)+' · jambes '+esc(x.legs)+' · pompes '+esc(x.push)+' · RIR '+esc(x.rir)+(x.tempo.charAt(0)==='4'?' · tempo '+esc(x.tempo):'')+'</span>'+(x.dl?'<span class="badge warn">tests</span>':'<span></span>')+'</button>';}
+  h+='</section>';
+  return h;
+}
+function vToday(){
+  var now=new Date(), w=weekOf(now), r=wRow(w), p=planFor(now);
+  var h='';
+  var wtxt=w===0?'Avant le début (S1 : lundi 19 octobre)':(w>12?'Programme terminé':'Semaine '+w+' sur 12');
+  var ph=w>=1&&w<=12?r.p:'';
+  h+='<div class="row wrap"><span class="badge">'+esc(wtxt)+'</span>'+(ph?'<span class="badge">'+esc(ph)+'</span>':'')+(w>=1&&w<=12&&r.dl?'<span class="badge warn">Semaine allégée</span>':'')+'</div>';
+  // séance du jour
+  var code=dayCode(p), off=!p.sess;
+  var done=false;Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.date===ymd(now)&&l.fin)done=true;});
+  h+='<section class="card"><h2>Aujourd\'hui</h2><div class="today"><div class="letter'+(off?' off':'')+'">'+esc(code)+'</div><div><h2 class="title">'+esc(p.title)+'</h2><p class="muted small">'+esc(p.sub)+'</p></div></div>';
+  if(p.hint)h+='<p class="note">'+esc(p.hint)+'</p>';
+  if(done)h+='<p class="badge ok" style="align-self:flex-start">Séance enregistrée aujourd\'hui</p>';
+  if(p.sess&&w>=1&&w<=12){var cc=weekCounts(w),pc0=sessCat(p.sess);if(QUOTA[pc0]!=null&&cc[pc0]>=QUOTA[pc0]&&!done){var rem=['A','B','C','M'].filter(function(k){return cc[k]<QUOTA[k];});if(rem.length)h+='<p class="note">'+esc(SESS[p.sess].name)+' déjà faite cette semaine. Il reste : '+rem.map(function(k){return k==='M'?'mini-mobilité':'séance '+k;}).join(', ')+'.</p>'+rem.map(function(k){return '<button class="btn ghost" data-act="go" data-sess="'+(k==='M'?'N':k)+'">'+(k==='M'?'Mini-mobilité':'Séance '+k)+'</button>';}).join('');}}
+  if(p.sess)h+='<button class="btn" data-act="go" data-sess="'+p.sess+'">'+(done?'Rouvrir la séance':'Commencer la séance')+'</button>';
+  if(p.k==='dance'||p.k==='tissu'){
+    var ak0=p.k==='dance'?'D':'T', ad0=actDone(ymd(now),ak0);
+    h+='<button class="btn'+(ad0?'':' ghost')+'" data-act="actt" data-d="'+ymd(now)+'" data-k="'+ak0+'" aria-pressed="'+(ad0?'true':'false')+'">'+(ad0?(p.k==='dance'?'Danse faite ✓':'Tissu fait ✓'):(p.k==='dance'?'J’ai fait la danse':'J’ai fait le tissu'))+'</button>';
+    if(p.k==='dance')h+='<button class="btn" data-act="go" data-sess="L">Cardio du lundi, 30 min</button>';
+    h+='<button class="btn" data-act="go" data-sess="X">Bonus écarts, 5 à 8 min</button>';
+  }
+  h+='<button class="btn ghost" data-act="go" data-sess="W">Marche rapide, 25 min (option)</button>';
+  h+='<button class="btn ghost" data-act="pick">Choisir une autre séance</button></section>';
+  var sk=ymd(now), sv=(state.steps&&state.steps[sk]!=null)?state.steps[sk]:'';
+  var goal=w===6?5500:(w<=3?4000:(w<=4?5000:(w<=7?6000:7000)));
+  var last7=[];for(var i7=0;i7<7;i7++){var v7=numv((state.steps||{})[ymd(addDays(now,-i7))]);if(v7!=null)last7.push(v7);}
+  var avg7=last7.length?Math.round(last7.reduce(function(a,b){return a+b;},0)/last7.length):null;
+  h+='<section class="card"><h2>Pas du jour</h2><div class="field"><label for="f-steps">Nombre de pas</label><input class="in" id="f-steps" inputmode="numeric" data-steps="'+sk+'" value="'+esc(sv)+'" placeholder="ex. 3500"></div><p class="small muted">Objectif de la semaine : '+goal+' pas par jour.'+(avg7!=null?' Ta moyenne sur '+last7.length+' jour'+(last7.length>1?'s':'')+' renseigné'+(last7.length>1?'s':'')+' : '+avg7+' pas.':'')+'</p></section>';
+  var dn=state.dnotes||{}, dk0=ymd(now), dk1=ymd(addDays(now,-1));
+  h+='<section class="card"><h2>Journal</h2><p class="small muted">Autres activités, ressenti, tout ce qui a changé dans ta journée.</p><div class="field"><label for="f-dn0">Aujourd’hui</label><textarea id="f-dn0" data-dnote="'+dk0+'" placeholder="Ex. 1 h de pilates">'+esc(dn[dk0]||'')+'</textarea></div><div class="field"><label for="f-dn1">Hier</label><textarea id="f-dn1" data-dnote="'+dk1+'" placeholder="Ex. 1 h de yoga">'+esc(dn[dk1]||'')+'</textarea></div><button class="btn ghost" data-act="jopen">Modifier un autre jour</button></section>';
+  // objectifs de la semaine
+  if(w>=1&&w<=12){
+    h+='<section class="card"><h2>Cibles de la semaine</h2><div class="target"><div><b class="num">'+r.n+'</b><span>série'+(r.n>1?'s':'')+' par exercice</span></div><div><b class="num">'+esc(r.legs)+'</b><span>jambes, par côté</span></div><div><b class="num">'+esc(r.push)+'</b><span>pompes inclinées</span></div><div><b class="num">'+esc(r.tempo)+'</b><span>tempo des jambes</span></div><div><b class="num">'+esc(r.rir)+'</b><span>RIR de référence</span></div><div><b class="num">'+r.core+'</b><span>gainage, reps/côté</span></div></div><p class="small muted">Mobilité : '+esc(r.amp)+'.</p>'+(r.note?'<p class="note">'+esc(r.note)+'</p>':'')+(VAC[w]?'<p class="note warn">'+esc(VAC[w])+'</p>':'')+'</section>';
+  }
+  // semaine en cours
+  var mon=weekMon(Math.max(1,Math.min(12,w||1)));
+  if(w===0)mon=START;
+  var fin=finishedInWeek(w), cnt=0;fin.forEach(function(l){if(l.sess!=='R'&&l.sess!=='X'&&l.sess!=='W'&&l.sess!=='L')cnt++;});
+  h+='<section class="card"><div class="row"><h2 class="grow">Cette semaine</h2><span class="muted small num">'+cnt+' / 5 séances</span></div><div class="week">';
+  for(var i=0;i<7;i++){
+    var d=addDays(mon,i), pl=planFor(d), key=ymd(d);
+    var dn=false;Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.date===key&&l.fin)dn=true;});
+    if((pl.k==='dance'&&actDone(key,'D'))||(pl.k==='tissu'&&actDone(key,'T')))dn=true;
+    h+='<div class="day'+(key===ymd(now)?' now':'')+(dn?' done':'')+'"><b>'+DSHORT[d.getDay()]+'</b><i>'+esc(dn?doneCode(key,pl):dayCode(pl))+'</i><span>'+d.getDate()+'</span></div>';
+  }
+  h+='</div>'+weekChecklist(w)+'<p class="small muted">A, B, C = séances de force. M = mini-mobilité, R = remplacement du tissu, D = danse, T = tissu.</p></section>';
+  // bilan
+  h+='<section class="card"><h2>Bilan hebdomadaire</h2><p class="small muted">Copie le résumé détaillé de ta semaine (séances, charges, ressenti, pas, journal) et colle-le dans la conversation avec Claude pour ajuster le programme.</p><button class="btn ghost" data-act="bilan">Copier le bilan</button><p id="bilanMsg" class="small muted" hidden></p></section>';
+  return h;
+}
+
+function exCard(ex,block,w,date,sess){
+  var rs=resolve(ex,block,w), d=D[ex.id]||{n:ex.id};
+  var lg=getLog(date,sess,false)||{sets:{},loads:{}};
+  var st=lg.sets[ex.id]||[];
+  var all=true;for(var i=0;i<rs.n;i++)if(!st[i])all=false;
+  var parts=[(rs.n>1?'<b>'+rs.n+' × '+esc(rs.reps)+'</b>':'<b>'+esc(rs.reps)+'</b>')];
+  if(rs.tempo)parts.push(esc(rs.tempo));
+  if(rs.rest&&rs.n>1)parts.push('repos '+rs.rest+' s');
+  if(rs.rir)parts.push('<b>RIR '+esc(rs.rir)+'</b>');
+  var h='<article class="ex'+(all?' done':'')+'" data-ex="'+ex.id+'"><div><h3>'+esc(d.n)+(ex.opt?' <span class="badge">Option</span>':'')+'</h3><p class="rx">'+parts.join(' · ')+'</p></div>';
+  h+='<div class="sets" role="group" aria-label="Séries faites">';
+  for(var j=0;j<rs.n;j++)h+='<button class="set" data-act="set" data-ex="'+ex.id+'" data-i="'+j+'" aria-pressed="'+(st[j]?'true':'false')+'" aria-label="Série '+(j+1)+'">'+(j+1)+'</button>';
+  h+='</div>';
+  var tools='';
+  if(ex.kg){
+    var ll=lastLoad(ex.id,date), cur=lg.loads[ex.id]!=null?lg.loads[ex.id]:'', tg=(LOADS[w]||{})[ex.id];
+    tools+='<div class="load"><input id="ld-'+ex.id+'" inputmode="decimal" autocomplete="off" data-load="'+ex.id+'" value="'+esc(cur)+'" placeholder="'+(ll?esc(ll.v):'0')+'" aria-label="Charge pour '+esc(d.n)+'"><label for="ld-'+ex.id+'">'+esc(ex.kg)+(tg!=null?'<br><b style="color:var(--ink)">Visée S'+w+' : '+esc(tg)+'</b>':'')+(ll?'<br>dernière fois : '+esc(ll.v):'')+'</label></div>';
+  }
+  if(ex.hold)tools+='<button class="btn ghost small" data-act="hold" data-sec="'+ex.hold+'" data-name="'+esc(d.n)+'">Chrono '+(ex.hold>=60?Math.floor(ex.hold/60)+' min'+(ex.hold%60?' '+ex.hold%60:''):ex.hold+' s')+'</button>';
+  if(tools)h+='<div class="tools">'+tools+'</div>';
+  if(rs.rir){
+    var cr=(lg.rirs&&lg.rirs[ex.id])||'';
+    h+='<div class="field"><span class="lab">RIR ressenti (visé '+esc(rs.rir)+')</span><div class="row wrap" style="gap:6px" role="group" aria-label="RIR ressenti">'+['4+','3','2','1','0'].map(function(v){return '<button type="button" class="chip" data-act="exrir" data-ex="'+ex.id+'" data-v="'+v+'" aria-pressed="'+(cr===v?'true':'false')+'">'+v+'</button>';}).join('')+'</div></div>';
+  }
+  h+='<details><summary>Exécution</summary><dl><dt>Cues</dt><dd>'+esc(d.c||'')+'</dd><dt>Erreurs</dt><dd>'+esc(d.e||'')+'</dd><dt>Régression</dt><dd>'+esc(d.r||'')+'</dd><dt>Progression</dt><dd>'+esc(d.p||'')+'</dd></dl></details></article>';
+  return h;
+}
+
+function vSess(){
+  var now=new Date(), date=ui.date, w=weekOf(new Date(date+'T12:00:00'));
+  if(!ui.sess){var p=planFor(now);ui.sess=p.sess||'M';}
+  var S=SESS[ui.sess], r=wRow(w);
+  var h='<div class="chips" role="group" aria-label="Choisir la séance">'+SORDER.map(function(k){return '<button class="chip" data-act="choose" data-sess="'+k+'" aria-pressed="'+(ui.sess===k?'true':'false')+'">'+SCHIP[k]+'</button>';}).join('')+'</div>';
+  h+='<div class="card"><div class="row"><div class="grow"><h2 class="title num" style="font:800 22px/1.1 var(--f-display);text-transform:none;letter-spacing:-.01em;color:var(--ink)">'+esc(S.name)+'</h2><p class="muted small">'+esc(S.sub)+' · '+esc(S.mins)+'</p></div><span class="badge'+(r.dl&&w>=1?' warn':'')+'">'+(w>=1&&w<=12?'S'+w+(r.dl?' allégée':''):'S1')+'</span></div>'+(r.dl&&w>=1&&w<=12?'<p class="note warn">Semaine allégée : 1 série par exercice de force, RIR 4 ou plus, la mobilité continue.</p>':'')+'<p class="small muted">RIR = répétitions en réserve. Il varie selon l\'exercice : plus de marge sur une jambe, aux épaules et en gainage. Tempo = descente, pause en bas, montée, pause en haut, en secondes. Ne verrouille jamais genoux et coudes.</p></div>';
+  S.blocks.forEach(function(b){
+    h+='<div class="block-title"><h2>'+esc(b.t)+'</h2><span>'+esc(b.m)+'</span></div>';
+    b.ex.forEach(function(ex){h+=exCard(exFor(ex,w),b,w,date,ui.sess);});
+  });
+  var lg=getLog(date,ui.sess,false);
+  h+=finishForm(lg);
+  return h;
+}
+function seg(name,val,max){
+  var o='<div class="seg" role="radiogroup">';
+  for(var i=1;i<=max;i++)o+='<label><input type="radio" name="'+name+'" value="'+i+'"'+(String(val)===String(i)?' checked':'')+'><span>'+i+'</span></label>';
+  return o+'</div>';
+}
+function finishForm(lg){
+  lg=lg||{};
+  var h='<section class="card" id="finish"><h2>Terminer la séance</h2>';
+  if(lg.fin)h+='<p class="badge ok" style="align-self:flex-start">Séance enregistrée</p>';
+  var mins=lg.mins!=null?lg.mins:'';
+  h+='<div class="field"><label for="f-mins">Durée (minutes)</label><input class="in" id="f-mins" inputmode="numeric" data-f="mins" value="'+esc(mins)+'" placeholder="45"></div>';
+  h+='<div class="field"><span class="lab">RIR ressenti, séance entière</span><div class="seg" role="radiogroup">'+['4+','3','2','1','0'].map(function(v){return '<label><input type="radio" name="rir" data-f="rir" value="'+v+'"'+(lg.rir===v?' checked':'')+'><span>'+v+'</span></label>';}).join('')+'</div></div>';
+  h+='<div class="field"><span class="lab">Fatigue (1 = fraîche, 5 = épuisée)</span>'+seg('fat',lg.fat,5).replace(/name="fat"/g,'name="fat" data-f="fat"')+'</div>';
+  h+='<div class="field"><span class="lab">Sommeil de la nuit (1 à 5)</span>'+seg('sleep',lg.sleep,5).replace(/name="sleep"/g,'name="sleep" data-f="sleep"')+'</div>';
+  h+='<div class="field"><label for="f-sens">Sensation</label><select id="f-sens" data-f="sens"><option value="">Choisir</option>'+['RAS','Courbature','Étirement','Douleur'].map(function(v){return '<option'+(lg.sens===v?' selected':'')+'>'+v+'</option>';}).join('')+'</select></div>';
+  h+='<div id="painWarn" class="alert"'+(lg.sens==='Douleur'?'':' hidden')+'>Une douleur aiguë, localisée ou articulaire n\'est pas une courbature. Arrête l\'exercice, passe à la régression et filme-le pour le montrer à Claude. Si elle dure plus d\'une semaine ou te réveille la nuit, demande un avis médical.</div>';
+  h+='<div class="field"><label for="f-note">Commentaire</label><textarea id="f-note" data-f="note" placeholder="Charges, ressenti, ce qui a coincé">'+esc(lg.note||'')+'</textarea></div>';
+  h+='<button class="btn" data-act="finish">'+(lg.fin?'Mettre à jour la séance':'Enregistrer la séance')+'</button><p id="finMsg" class="small muted" hidden></p></section>';
+  return h;
+}
+
+function vLog(){
+  var h='';
+  h+='<section class="card"><h2>Régularité</h2><p class="small muted">5 séances prévues par semaine : A, B, C et 2 mini-mobilités.</p><div>';
+  var now=new Date(), cw=weekOf(now);
+  for(var w=1;w<=12;w++){
+    var fin=finishedInWeek(w), counts={A:0,B:0,C:0,M:0}, extra=0;
+    fin.forEach(function(l){var cs=l.sess==='N'?'M':l.sess;if(counts[cs]!=null)counts[cs]++;else extra++;});
+    var dots='';
+    ['A','B','C'].forEach(function(k){dots+='<span class="dot'+(counts[k]?' on':'')+'" title="'+k+'"></span>';});
+    for(var m=0;m<2;m++)dots+='<span class="dot'+(counts.M>m?' on':'')+'" title="M"></span>';
+    var total=Math.min(1,counts.A)+Math.min(1,counts.B)+Math.min(1,counts.C)+Math.min(2,counts.M);
+    h+='<div class="wk"><b class="num">S'+w+'</b><div class="dots">'+dots+'</div><span class="small '+(W[w].dl?'badge warn':'muted')+'">'+(W[w].dl?'allégée · ':'')+total+'/5</span></div>';
+  }
+  h+='</div></section>';
+  var jd=ui.jd||ymd(new Date()), dnn=state.dnotes||{};
+  h+='<section class="card"><h2>Journal</h2><p class="small muted">Aujourd’hui est à gauche, les jours précédents suivent vers la droite. Touche un jour pour saisir ou modifier ses pas et sa note. Un point indique que des pas ou une note existent.</p><div class="chips" role="group" aria-label="Choisir le jour">';
+  var tdy=new Date(), nd=Math.max(1,Math.round((new Date(ymd(tdy)+'T12:00:00')-new Date(ymd(START)+'T12:00:00'))/86400000)+1), shown=Math.min(nd,ui.jn||7);
+  for(var q2=0;q2<shown;q2++){var dd=addDays(tdy,-q2), kk2=ymd(dd);h+='<button class="chip" data-act="jday" data-d="'+kk2+'" aria-pressed="'+(kk2===jd?'true':'false')+'">'+esc((q2===0?'Auj.':DSHORT[dd.getDay()])+' '+dd.getDate())+((dnn[kk2]||(state.steps&&state.steps[kk2]))?' •':'')+'</button>';}
+  if(shown<nd)h+='<button class="chip" data-act="jmore" aria-label="Afficher 7 jours de plus">Jours précédents</button>';
+  h+='</div>';
+  h+='<p><b>'+esc(longDate(new Date(jd+'T12:00:00')))+'</b></p>';
+  h+='<div class="field"><label for="f-jsteps">Pas du jour</label><input class="in" id="f-jsteps" inputmode="numeric" data-steps="'+jd+'" value="'+esc((state.steps&&state.steps[jd])||'')+'" placeholder="ex. 3500"></div>';
+  h+='<div class="field"><label for="f-jd">Note</label><textarea id="f-jd" data-dnote="'+jd+'" placeholder="Ex. 1 h de pilates, mal dormi, déplacement">'+esc(dnn[jd]||'')+'</textarea></div></section>';
+  var skeys=Object.keys(state.steps||{}).filter(function(k){return numv(state.steps[k])!=null;}).sort();
+  var walkDays={};Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.fin&&l.sess==='W')walkDays[l.date]=(walkDays[l.date]||0)+1;});
+  if(skeys.length||Object.keys(walkDays).length){
+    var av=function(a){return a.length?Math.round(a.reduce(function(x,y){return x+y;},0)/a.length):null;};
+    var sval=function(k){return numv(state.steps[k]);};
+    h+='<section class="card"><h2>Pas et marche</h2>';
+    if(skeys.length){var l7=skeys.slice(-7).map(sval), l7a=av(l7), alla=av(skeys.map(sval));h+='<p class="small muted">Moyenne par jour : <b>'+l7a+'</b> pas sur '+(l7.length>1?'les '+l7.length+' derniers jours renseignés':'le dernier jour renseigné')+', <b>'+alla+'</b> depuis le début ('+skeys.length+' jour'+(skeys.length>1?'s':'')+').</p>';}
+    var cw2=Math.max(1,Math.min(12,weekOf(new Date())||1));var SM=7000;(function(){for(var wq=1;wq<=cw2;wq++){var mq=weekMon(wq),sq=[];for(var dq=0;dq<7;dq++){var vq=numv((state.steps||{})[ymd(addDays(mq,dq))]);if(vq!=null)sq.push(vq);}if(sq.length>=5){var aq=av(sq);if(aq>SM)SM=aq;}}SM=Math.ceil(SM/1000)*1000;})();
+    for(var w2=1;w2<=cw2;w2++){
+      var mn=weekMon(w2), vals=[], wc=0;
+      for(var d2=0;d2<7;d2++){var kd=ymd(addDays(mn,d2)), vv=numv((state.steps||{})[kd]);if(vv!=null)vals.push(vv);wc+=walkDays[kd]||0;}
+      var a2=av(vals), g2=w2===6?5500:(w2<=3?4000:(w2<=4?5000:(w2<=7?6000:7000))), pc=a2!=null?Math.min(100,Math.round(a2/SM*100)):0, gp=Math.round(g2/SM*100);
+      h+='<div class="wk" style="grid-template-columns:34px 1fr;row-gap:5px"><b class="num">S'+w2+'</b><span class="small muted num" style="text-align:right">'+(a2!=null?a2+' / '+g2+' · '+vals.length+'/7 j'+(vals.length<5?' · partiel':''):'—')+(wc?' · '+wc+' marche'+(wc>1?'s':''):'')+'</span><span></span><div style="position:relative;height:8px;border-radius:4px;background:var(--line);overflow:hidden" role="img" aria-label="'+(a2!=null?a2+' pas par jour, objectif '+g2:'Pas de données')+'"><div style="height:100%;width:'+pc+'%;opacity:'+(vals.length>=5?1:0.45)+';background:'+(a2!=null&&a2>=g2&&vals.length>=5?'var(--ok)':'var(--accent)')+'"></div><i style="position:absolute;left:'+gp+'%;top:0;bottom:0;width:2px;background:var(--ink);opacity:.6"></i></div></div>';
+    }
+    h+='<p class="small muted">Chaque barre est la moyenne de pas par jour de la semaine, sur la même échelle pour toutes les semaines. Le trait noir marque l’objectif de la semaine, qui monte par paliers. « 2/7 j » = 2 jours saisis sur 7, les jours vides ne comptent pas. Verte si l’objectif est atteint avec au moins 5 jours saisis. Une semaine avec moins de 5 jours saisis est marquée « partiel », en barre claire, et ne compte pas dans l’échelle. Moyenne et barre se lisent face à l\'objectif. « 1 marche » = une séance Marche rapide enregistrée dans la semaine, pas un nombre de pas.</p>';
+    var recent=skeys.slice(-14).reverse();
+    if(recent.length){h+='<details><summary>Derniers jours</summary>';recent.forEach(function(k){var dt=new Date(k+'T12:00:00');h+='<p class="small"><b>'+esc(DSHORT[dt.getDay()]+' '+dt.getDate()+'/'+pad(dt.getMonth()+1))+'</b> · '+sval(k)+' pas'+(walkDays[k]?' · marche rapide':'')+'</p>';});h+='</details>';}
+    h+='</section>';
+  }
+  // charges
+  var ids={};
+  Object.keys(state.log).forEach(function(k){var l=state.log[k];Object.keys(l.loads||{}).forEach(function(id){if(l.loads[id]!=='')ids[id]=1;});});
+  var exs=[];SORDER.forEach(function(s){SESS[s].blocks.forEach(function(b){b.ex.forEach(function(e){if(e.kg&&exs.indexOf(e)<0&&!exs.some(function(x){return x.id===e.id;}))exs.push(e);});});});
+  h+='<section class="card"><h2>Charges</h2>';
+  var any=false;
+  exs.forEach(function(e){
+    if(!ids[e.id])return;any=true;
+    var byW={};
+    Object.keys(state.log).forEach(function(k){var l=state.log[k];if(l.loads&&l.loads[e.id]!==undefined&&l.loads[e.id]!==''){var v=numv(l.loads[e.id]);if(v==null)return;var cur=byW[l.week];if(cur==null||(e.lower?v<cur:v>cur))byW[l.week]=v;}});
+    var ws=Object.keys(byW).map(Number).sort(function(a,b){return a-b;});
+    var vals=ws.map(function(x){return byW[x];});
+    var best=e.lower?Math.min.apply(null,vals):Math.max.apply(null,vals);
+    h+='<div class="log"><div class="row"><b class="grow">'+esc(D[e.id].n)+'</b><span class="num">'+fmt(best)+'</span></div><div class="hist">'+ws.map(function(x){return '<span>S'+x+' <b>'+fmt(byW[x])+'</b></span>';}).join('')+'</div><p class="small muted">'+esc(e.kg)+(e.lower?' (plus bas = mieux)':'')+'</p></div>';
+  });
+  if(!any)h+='<p class="small muted">Tes charges apparaîtront ici dès que tu en saisis pendant une séance.</p>';
+  h+='</section>';
+  // RIR par exercice
+  var rmap={};
+  Object.keys(state.log).forEach(function(k){var l=state.log[k];if(!l.rirs)return;Object.keys(l.rirs).forEach(function(id){var v=l.rirs[id];if(!v||!D[id])return;var m=rmap[id]||(rmap[id]={});var c=m[l.week];if(!c||l.date>c.date)m[l.week]={date:l.date,v:v};});});
+  h+='<section class="card"><h2>RIR par exercice</h2>';
+  var rids=Object.keys(rmap).sort(function(a,b){return D[a].n<D[b].n?-1:1;});
+  if(!rids.length)h+='<p class="small muted">Note le RIR de chaque exercice de force pendant la séance. Tu verras ici lesquels sont faciles (RIR 4+ ou 3) et lesquels sont durs (RIR 1 ou 0).</p>';
+  else{
+    h+='<p class="small muted">RIR haut = facile, RIR bas = dur. Dernière valeur de chaque semaine.</p>';
+    rids.forEach(function(id){
+      var ws2=Object.keys(rmap[id]).map(Number).sort(function(a,b){return a-b;});
+      h+='<div class="log"><div class="row"><b class="grow">'+esc(D[id].n)+'</b><span class="num">'+esc(rmap[id][ws2[ws2.length-1]].v)+'</span></div><div class="hist">'+ws2.map(function(x){return '<span>S'+x+' <b>'+esc(rmap[id][x].v)+'</b></span>';}).join('')+'</div></div>';
+    });
+  }
+  h+='</section>';
+  // journal
+  var logs=Object.keys(state.log).map(function(k){return state.log[k];}).filter(function(l){return l.fin;}).sort(function(a,b){return a.date<b.date?1:(a.date>b.date?-1:0);});
+  h+='<section class="card"><h2>Journal</h2>';
+  if(!logs.length)h+='<p class="small muted">Aucune séance enregistrée pour l\'instant.</p>';
+  logs.slice(0,30).forEach(function(l){
+    var dt=new Date(l.date+'T12:00:00');
+    h+='<div class="log"><div class="row"><b class="grow">'+esc(SESS[l.sess].name)+'</b><span class="muted small">'+esc(DSHORT[dt.getDay()]+' '+dt.getDate()+'/'+pad(dt.getMonth()+1))+' · S'+l.week+'</span></div><div class="hist">'+(l.mins?'<span><b>'+esc(l.mins)+'</b> min</span>':'')+(l.rir?'<span>RIR <b>'+esc(l.rir)+'</b></span>':'')+(l.fat?'<span>Fatigue <b>'+l.fat+'</b></span>':'')+(l.sleep?'<span>Sommeil <b>'+l.sleep+'</b></span>':'')+(l.sens?'<span class="'+(l.sens==='Douleur'?'bad':'')+'"><b>'+esc(l.sens)+'</b></span>':'')+'</div>'+(l.note?'<p class="small">'+esc(l.note)+'</p>':'')+'</div>';
+  });
+  h+='</section>';
+  return h;
+}
+
+function tVal(t,col){
+  var s=state.tests[t.id];
+  if(s&&s[col]!==undefined)return s[col];
+  if(col==='S0'&&t.v!=null)return t.v;
+  return '';
+}
+function vTests(){
+  var w=weekOf(new Date()), next=w<=0?'S0':(w<=4?'S4':(w<=8?'S8':'S12'));
+  var h='<section class="card"><h2>Tests de suivi</h2><p class="small muted">Semaines 0, 4, 8 et 12. Échauffe-toi 10 minutes, même heure, mêmes conditions. S4, S8 et S12 sont des semaines allégées : tu es fraîche. Prochain rendez-vous : <b>'+next+'</b>. Les cases bleues sont celles à remplir. Les tests plafonnés au bilan S4 (planche latérale, équilibre yeux fermés, squat profond, flexion d\'épaule au mur, toucher d\'orteils) ne sont plus demandés en S8 et S12.</p></section>';
+  ['Force','Souplesse'].forEach(function(cat){
+    h+='<section class="card"><h2>'+cat+'</h2>';
+    TESTS.filter(function(t){return t.cat===cat;}).forEach(function(t){
+      var s0=numv(tVal(t,'S0')), last=null;
+      ['S12','S8','S4'].forEach(function(c){if(last===null){var v=numv(tVal(t,c));if(v!=null)last=v;}});
+      var dl='';
+      if(s0!=null&&last!=null){var df=last-s0;var good=(df*t.b)>0;dl='<span class="delta '+(df===0?'':(good?'good':'badv'))+'">'+(df>0?'+':'')+fmt(df)+' depuis S0</span>';}
+      h+='<div class="test"><div><b>'+esc(t.l)+'</b><div class="small muted">'+esc(t.u)+' · '+(t.b>0?'plus haut = mieux':'plus bas = mieux')+(T_END[t.id]!=null?' · retiré après S4 (plafonné)':'')+' '+dl+'</div></div><div class="t4">';
+      TCOLS.forEach(function(c){if(T_END[t.id]!=null&&+c.slice(1)>T_END[t.id])return;h+='<label>'+c+'<input inputmode="decimal" autocomplete="off" data-test="'+t.id+'" data-col="'+c+'" value="'+esc(tVal(t,c))+'"'+(c===next?' class="next"':'')+'></label>';});
+      h+='</div></div>';
+    });
+    h+='</section>';
+  });
+  return h;
+}
+
+function vGuide(){
+  var h='<section class="card guide"><h2>Lire une séance</h2><ul><li><b>RIR</b> : nombre de répétitions que tu pourrais encore faire avant l\'échec. Si tu estimes mal, termine la série en pouvant encore parler en phrases courtes.</li><li><b>Tempo</b> : 4 chiffres en secondes, dans l\'ordre descente, pause en bas, montée, pause en haut. 3-1-1-0 = descente 3 s, pause 1 s, montée 1 s.</li><li><b>Semaine allégée</b> : S4, S8 et S12. 1 série par exercice de force, RIR 4 ou plus, la mobilité continue. Les tests se font ces semaines-là.</li></ul></section>';
+  h+='<section class="card guide"><h2>Le tempo, en détail</h2><p>4 chiffres, en secondes, toujours dans cet ordre : descente, pause en bas, montée, pause en haut.</p><ul><li><b>3-1-1-0</b> (squat) : tu descends en 3 s, tu restes 1 s en bas sans te laisser tomber, tu remontes en 1 s, puis tu enchaînes (0 = pas de pause en haut).</li><li><b>4-1-1-0</b> : pareil avec une descente de 4 s (phase 3).</li><li><b>2-0-1-1</b> (rowing) : tu tires en 1 s et tu serres l\'omoplate 1 s en haut.</li><li><b>3-2-1-0</b> (pompes avec pause) : descente de 3 s, pause de 2 s en bas.</li></ul><p>Pourquoi : descendre lentement fait travailler plus fort sans ajouter de poids, et la pause supprime l\'élan et protège tes articulations. Compte dans ta tête « un, deux, trois ». Si tu ne tiens pas le tempo, la charge est trop lourde ou tu es trop fatiguée : allège. Quand c\'est écrit « lent », bouge doucement sans compter.</p></section>';
+  h+='<section class="card guide"><h2>Douleur ou courbature ?</h2><ul><li>Une courbature est diffuse et se calme en 48 à 72 h.</li><li>Une sensation d\'étirement est tolérable et disparaît dès que tu relâches.</li><li>Une douleur est aiguë, localisée, articulaire, ou augmente pendant et après l\'exercice. Arrête, passe à la régression, filme le mouvement.</li><li>Si elle dure plus d\'une semaine, te réveille la nuit ou s\'accompagne d\'engourdissements ou d\'instabilité : avis médical avant de continuer.</li><li>Précautions : genoux et coudes souples, jamais de cambrure passive du bas du dos, poignets échauffés et appui sur les doigts. Si une articulation « part », réduis l\'amplitude.</li></ul></section>';
+  h+='<section class="card guide"><h2>Semaine normale</h2><ul><li>Lundi : cardio de 30 min le matin ou à midi (séance L), danse le soir. Mardi : séance A. Mercredi : mini-mobilité (circuit de hanches).</li><li>Jeudi : tissu. Vendredi : séance B. Samedi : séance C.</li><li>Dimanche : mini-mobilité légère, facultative.</li><li>Une séance manquée : ne la rattrape pas. Une semaine complète manquée : refais la semaine précédente. Deux semaines ou plus : reprends avec des charges réduites de 10-20 %.</li></ul></section>';
+  h+='<section class="card guide"><h2>Cardio doux et pas</h2><ul><li>Note tes pas du jour dans l\'onglet Jour. L\'objectif monte par paliers : 4000, 5000, 6000 puis 7000 par jour.</li><li>La marche rapide dure 25 à 30 min, deux fois par semaine au maximum, les jours sans séance de force. Tu dois pouvoir parler mais pas chanter.</li><li>Les intervalles ont leur place le lundi, dans la séance cardio de 30 min (séance L) : effort soutenu, tu ne peux dire que des phrases courtes.</li></ul></section>';
+  h+='<section class="card guide"><h2>Matériel</h2><ul><li>Haltères : 10 kg maximum chacun avec ton kit. Avant d\'acheter des disques de 5 kg, passe aux tempos lents, aux pauses et aux variantes plus dures.</li><li>Sans haltères : sac à dos chargé.</li></ul></section>';
+  h+='<section class="card guide"><h2>Chaque semaine</h2><p>Copie ton bilan depuis l\'onglet Aujourd\'hui, colle-le à Claude avec tes éventuelles douleurs, et le programme est ajusté à partir de tes retours. Filme tes mouvements clés pour qu\'il puisse les corriger.</p></section>';
+  return h;
+}
+
+/* ================= Actions ================= */
+function bilanText(){
+  var now=new Date(), w=Math.max(1,Math.min(12,weekOf(now)||1)), r=wRow(w);
+  var mon=weekMon(w), sun=addDays(mon,6), today=ymd(now), out=[];
+  function dl(d){return DSHORT[d.getDay()]+' '+pad(d.getDate())+'/'+pad(d.getMonth()+1);}
+  function mean(a){return a.length?a.reduce(function(x,y){return x+y;},0)/a.length:null;}
+  function nums(list,k){return list.map(function(x){return numv(x[k]);}).filter(function(x){return x!=null;});}
+  function plur(n,s,p){return n+' '+(n>1?(p||s+'s'):s);}
+  var fin=finishedInWeek(w);
+  out.push('BILAN SEMAINE '+w+' sur 12 · '+r.p+(r.dl?' (semaine allégée)':'')+' · du '+dl(mon)+' au '+dl(sun));
+  out.push('Cibles : '+plur(r.n,'série')+' par exercice, jambes '+r.legs+', pompes '+r.push+', tempo '+r.tempo+', RIR '+r.rir);
+
+  // Séances prévues et faites
+  var core=fin.filter(function(l){return 'ABCMN'.indexOf(l.sess)>=0;});
+  var planned=[], totalPlanned=0;
+  for(var i=0;i<7;i++){var d=addDays(mon,i), p=planFor(d);if(p.sess&&'ABCMN'.indexOf(p.sess)>=0){totalPlanned++;if(ymd(d)<=today)planned.push({s:(p.sess==='N'?'M':p.sess),d:d});}}
+  var left={};core.forEach(function(l){var ks=l.sess==='N'?'M':l.sess;left[ks]=(left[ks]||0)+1;});
+  var missed=[];planned.forEach(function(q){if(left[q.s]>0)left[q.s]--;else missed.push(q.s+' ('+dl(q.d)+')');});
+  out.push('');
+  out.push('SÉANCES : '+core.length+' sur '+totalPlanned+' prévues faites');
+  if(missed.length)out.push('- Non faites : '+missed.join(', '));
+  if(!fin.length)out.push('- Aucune séance enregistrée cette semaine');
+  fin.forEach(function(l){
+    var S=SESS[l.sess];if(!S)return;
+    var tot=0, dn=0, opts=[];
+    S.blocks.forEach(function(b){b.ex.forEach(function(ex){
+      ex=exFor(ex,l.week);var rr=resolve(ex,b,l.week), arr=(l.sets||{})[ex.id]||[], c=arr.filter(Boolean).length;
+      if(ex.opt){if(c&&D[ex.id])opts.push(D[ex.id].n);}else{tot+=rr.n;dn+=Math.min(c,rr.n);}
+    });});
+    var dt=new Date(l.date+'T12:00:00');
+    out.push('- '+dl(dt)+' · '+S.name+' · '+(l.mins?l.mins+' min':'durée non notée')+' · RIR '+(l.rir||'?')+' · fatigue '+(l.fat||'?')+'/5 · sommeil '+(l.sleep||'?')+'/5 · sensation : '+(l.sens||'non notée')+' · séries cochées '+dn+'/'+tot+(opts.length?' · options faites : '+opts.join(', '):''));
+    if(l.rirs){var rl=[];S.blocks.forEach(function(b){b.ex.forEach(function(ex){var rv=l.rirs[ex.id];if(rv&&D[ex.id])rl.push(D[ex.id].n+' '+rv);});});if(rl.length)out.push('  RIR par exercice : '+rl.join(', '));}
+    if(l.note&&String(l.note).trim())out.push('  Commentaire : '+String(l.note).replace(/\s*\n\s*/g,' / ').trim());
+  });
+
+  // Danse et tissu
+  var dtl=[];
+  for(var dxi=0;dxi<7;dxi++){var dx=addDays(mon,dxi), px=planFor(dx);if((px.k==='dance'||px.k==='tissu')&&ymd(dx)<=today)dtl.push('- '+(px.k==='dance'?'Danse':'Tissu')+' '+dl(dx)+' : '+(actDone(ymd(dx),px.k==='dance'?'D':'T')?'faite':'non validée'));}
+  if(dtl.length){out.push('');out.push('DANSE ET TISSU');dtl.forEach(function(x){out.push(x);});}
+
+  // Ressenti
+  out.push('');
+  out.push('RESSENTI');
+  var fa=mean(nums(fin,'fat')), sl=mean(nums(fin,'sleep'));
+  var pf=w>1?finishedInWeek(w-1):[], pfa=mean(nums(pf,'fat')), psl=mean(nums(pf,'sleep'));
+  out.push('- Fatigue moyenne : '+(fa!=null?fmt(fa)+'/5':'non notée')+(pfa!=null?' (semaine précédente : '+fmt(pfa)+')':''));
+  out.push('- Sommeil moyen : '+(sl!=null?fmt(sl)+'/5':'non noté')+(psl!=null?' (semaine précédente : '+fmt(psl)+')':''));
+  var painL=fin.filter(function(l){return l.sens==='Douleur';}).map(function(l){return SESS[l.sess].name+' '+dl(new Date(l.date+'T12:00:00'));});
+  out.push('- Douleur : '+(painL.length?'oui, '+painL.join(', ')+' (voir les commentaires)':'aucune signalée'));
+
+  // Charges
+  var cur={};
+  fin.forEach(function(l){Object.keys(l.loads||{}).forEach(function(id){if(l.loads[id]!==''&&l.loads[id]!=null)cur[id]=l.loads[id];});});
+  var ids=Object.keys(cur).filter(function(id){return D[id];});
+  if(ids.length){
+    out.push('');
+    out.push('CHARGES (dernière valeur de la semaine)');
+    ids.forEach(function(id){var pv=lastLoad(id,ymd(mon));out.push('- '+D[id].n+' : '+cur[id]+(pv?' (avant : '+pv.v+')':' (première saisie)'));});
+  }
+
+  // Tests
+  if(w%4===0){
+    var tl=[];TESTS.forEach(function(t){if(T_END[t.id]!=null&&w>T_END[t.id])return;var v=state.tests&&state.tests[t.id]&&state.tests[t.id]['S'+w];if(v!==undefined&&v!==''&&v!==null){var b0=state.tests[t.id].S0;tl.push('- '+t.l+' : '+v+(b0?' (départ : '+b0+')':''));}});
+    if(tl.length){out.push('');out.push('TESTS DE LA SEMAINE '+w);tl.forEach(function(x){out.push(x);});}
+  }
+
+  // Pas et marche
+  out.push('');
+  out.push('PAS ET MARCHE');
+  var goal=w<=3?4000:(w<=4?5000:(w<=7?6000:7000)), st=state.steps||{};
+  function weekSteps(wk){var m=weekMon(wk), a=[], list=[];for(var q=0;q<7;q++){var dd=addDays(m,q), v=numv(st[ymd(dd)]);list.push(DSHORT[dd.getDay()]+' '+(v!=null?v:'—'));if(v!=null)a.push(v);}return {a:a,list:list};}
+  var cs=weekSteps(w), cm=mean(cs.a);
+  out.push('- Par jour : '+cs.list.join(', '));
+  out.push('- Moyenne : '+(cm!=null?Math.round(cm)+' pas par jour sur '+plur(cs.a.length,'jour renseigné','jours renseignés'):'non renseignée')+' · objectif de la semaine : '+goal);
+  if(w>1){var ps=weekSteps(w-1), pm=mean(ps.a);if(pm!=null)out.push('- Semaine précédente : '+Math.round(pm)+' pas par jour sur '+plur(ps.a.length,'jour renseigné','jours renseignés'));}
+  var walks=fin.filter(function(l){return l.sess==='W';});
+  out.push('- Marches rapides : '+walks.length+(walks.length?' ('+walks.map(function(l){return dl(new Date(l.date+'T12:00:00'))+(l.mins?' '+l.mins+' min':'');}).join(', ')+')':''));
+
+  // Journal
+  var dnl=[];
+  for(var j=0;j<7;j++){var dj=addDays(mon,j), kk=ymd(dj);if(state.dnotes&&state.dnotes[kk]&&String(state.dnotes[kk]).trim())dnl.push('- '+dl(dj)+' : '+String(state.dnotes[kk]).replace(/\s*\n\s*/g,' / ').trim());}
+  if(dnl.length){out.push('');out.push('JOURNAL (autres activités, ressenti)');dnl.forEach(function(x){out.push(x);});}
+  return out.join('\n');
+}
+function showMsg(id,t){var el=$('#'+id);if(!el)return;el.textContent=t;el.hidden=false;}
+function copyText(t,done){
+  function fb(){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);done(ok);}
+  try{navigator.clipboard.writeText(t).then(function(){done(true);},fb);}catch(e){fb();}
+}
+var wake=null, wakeBusy=false;
+function wakeOn(){
+  try{
+    if(!navigator.wakeLock||wake||wakeBusy)return;
+    wakeBusy=true;
+    navigator.wakeLock.request('screen').then(function(l){
+      wakeBusy=false;wake=l;
+      l.addEventListener('release',function(){wake=null;});
+      if(ui.tab!=='sess'){wakeOff();}
+    },function(){wakeBusy=false;});
+  }catch(e){wakeBusy=false;}
+}
+function wakeOff(){try{if(wake){var l=wake;wake=null;l.release();}}catch(e){}}
+
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act],[data-tab]');
+  if(!t)return;
+  if(t.dataset.tab){ui.tab=t.dataset.tab;if(ui.tab==='sess')wakeOn();else wakeOff();if(ui.tab==='weeks')ui.wk=null;render();window.scrollTo(0,0);return;}
+  var a=t.dataset.act;
+  if(a==='go'){ui.sess=t.dataset.sess;ui.date=ymd(new Date());ui.tab='sess';wakeOn();render();window.scrollTo(0,0);}
+  else if(a==='pick'){ui.sess=null;ui.date=ymd(new Date());ui.tab='sess';ui.sess='A';render();window.scrollTo(0,0);}
+  else if(a==='choose'){ui.sess=t.dataset.sess;render();}
+  else if(a==='jday'){var jc2=document.querySelector('.chips'),sl2=jc2?jc2.scrollLeft:0;ui.jd=t.dataset.d;render();var jc3=document.querySelector('.chips');if(jc3)jc3.scrollLeft=sl2;}
+  else if(a==='exrir'){
+    var xid=t.dataset.ex, xv=t.dataset.v, lgx=getLog(ui.date,ui.sess,true);
+    if(!lgx.rirs)lgx.rirs={};
+    lgx.rirs[xid]=(lgx.rirs[xid]===xv)?'':xv;
+    var xcard=t.closest('.ex');
+    if(xcard)xcard.querySelectorAll('[data-act="exrir"]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===lgx.rirs[xid]?'true':'false');});
+    if(!lgx.startedAt)lgx.startedAt=Date.now();
+    save();
+  }
+  else if(a==='actt'){var ad1=t.dataset.d,ak1=t.dataset.k;if(!state.act)state.act={};var o1=state.act[ad1]||(state.act[ad1]={});o1[ak1]=!o1[ak1];if(!o1.D&&!o1.T)delete state.act[ad1];save();render();}
+  else if(a==='jmore'){var jc0=document.querySelector('.chips'),sl0=jc0?jc0.scrollLeft:0;ui.jn=(ui.jn||7)+7;render();var jc1=document.querySelector('.chips');if(jc1)jc1.scrollLeft=sl0;}
+  else if(a==='jopen'){ui.jd=ymd(new Date());ui.tab='log';render();window.scrollTo(0,0);}
+  else if(a==='set'){
+    var id=t.dataset.ex,i=+t.dataset.i,lg=getLog(ui.date,ui.sess,true);
+    var arr=lg.sets[id]||[];arr[i]=!arr[i];for(var q=0;q<arr.length;q++)arr[q]=!!arr[q];lg.sets[id]=arr;
+    if(!lg.startedAt)lg.startedAt=Date.now();
+    t.setAttribute('aria-pressed',arr[i]?'true':'false');
+    var card=t.closest('.ex');var all=true;card.querySelectorAll('.set').forEach(function(b){if(b.getAttribute('aria-pressed')!=='true')all=false;});
+    card.classList.toggle('done',all);
+    save();
+    if(arr[i]){
+      var ex=null;SESS[ui.sess].blocks.forEach(function(b){b.ex.forEach(function(x){if(x.id===id)ex=x;});});
+      var isLast=true;card.querySelectorAll('.set').forEach(function(b,idx,all2){if(idx!==all2.length-1&&b.getAttribute('aria-pressed')!=='true')isLast=false;});
+      if(ex&&ex.rest&&!all)startTimer(ex.rest,'Repos : '+(D[id]?D[id].n:id));
+    }
+  }
+  else if(a==='hold'){startTimer(+t.dataset.sec,t.dataset.name);}
+  else if(a==='t+'){if(timer){timer.end+=15000;timer.done=false;paintTimer();}}
+  else if(a==='tx'){stopTimer();}
+  else if(a==='finish'){
+    var lg2=getLog(ui.date,ui.sess,true);
+    lg2.fin=true;lg2.finishedAt=Date.now();
+    if(lg2.mins==null||lg2.mins===''){if(lg2.startedAt)lg2.mins=String(Math.max(1,Math.round((Date.now()-lg2.startedAt)/60000)));}
+    save();showMsg('finMsg','Séance enregistrée. Elle apparaît dans ton suivi.');
+    var b=$('[data-act="finish"]');if(b)b.textContent='Mettre à jour la séance';
+    var inp=$('#f-mins');if(inp&&lg2.mins)inp.value=lg2.mins;
+  }
+  else if(a==='wk'){ui.wk=Math.max(1,Math.min(12,+t.dataset.w));render();window.scrollTo(0,0);}
+  else if(a==='syncinfo'){syncInfo();}
+  else if(a==='bk-export'){doExport();}
+  else if(a==='bk-copy'){copyText(backupFile().txt,function(ok){bkMsg(ok?'Sauvegarde copiée. Colle-la dans une note ou un message à toi-même.':'Copie impossible ici.');});}
+  else if(a==='bk-file'){var bf=$('#bkFile');if(bf)bf.click();}
+  else if(a==='bk-paste'){var bt=$('#bkText');if(bt&&bt.value.trim())restoreFrom(bt.value);else bkMsg('Colle d\'abord le texte de la sauvegarde.');}
+  else if(a==='bilan'){
+    var txt=bilanText();
+    copyText(txt,function(ok){showMsg('bilanMsg',ok?'Bilan copié. Colle-le dans la conversation avec Claude.':'Copie impossible ici. Sélectionne le texte ci-dessous.');if(!ok){var m=$('#bilanMsg');m.textContent=txt;m.style.whiteSpace='pre-wrap';}});
+  }
+});
+function onInput(e){
+  var t=e.target;
+  if(t.dataset.load){var lg=getLog(ui.date,ui.sess,true);lg.loads[t.dataset.load]=t.value.trim();save();}
+  else if(t.dataset.dnote){if(!state.dnotes)state.dnotes={};state.dnotes[t.dataset.dnote]=t.value;save();}
+  else if(t.dataset.steps){if(!state.steps)state.steps={};state.steps[t.dataset.steps]=t.value.trim();save();}
+  else if(t.dataset.test){var s=state.tests[t.dataset.test]||(state.tests[t.dataset.test]={});s[t.dataset.col]=t.value.trim();save();}
+  else if(t.dataset.f){
+    var l=getLog(ui.date,ui.sess,true),k=t.dataset.f;
+    l[k]=t.value;
+    if(k==='sens'){var pw=$('#painWarn');if(pw)pw.hidden=(t.value!=='Douleur');}
+    save();
+  }
+}
+document.addEventListener('input',function(e){if(e.target.matches('input[type="text"],input:not([type]),textarea')||e.target.dataset.test||e.target.dataset.load||e.target.dataset.steps||e.target.dataset.dnote)onInput(e);});
+document.addEventListener('change',function(e){if(e.target.matches('input[type="radio"],select'))onInput(e);});
+
+if(window.claude&&window.claude.hot&&window.claude.hot.snapshot){try{window.claude.hot.snapshot(function(){return {tab:ui.tab,sess:ui.sess};});}catch(e){}}
+render();
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&ui.tab==='sess')wakeOn();});
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+</script>
+
+</body></html>
