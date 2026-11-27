@@ -1,9 +1,9 @@
 // Service worker : l'appli fonctionne hors ligne.
 // Pour publier une mise à jour, change le numéro de VERSION.
-const VERSION = 'v4';
+const VERSION = 'v5';
 const CACHE = 'programme-12s-' + VERSION;
 const FILES = [
-  './', 'index.html', 'manifest.webmanifest',
+  './', 'index.html', 'app.js', 'manifest.webmanifest',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png',
   'fonts/bricolage-grotesque-latin-600-normal.woff2', 'fonts/bricolage-grotesque-latin-800-normal.woff2',
   'fonts/hanken-grotesk-latin-400-normal.woff2', 'fonts/hanken-grotesk-latin-500-normal.woff2',
@@ -11,7 +11,7 @@ const FILES = [
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES.map((u) => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (e) => {
@@ -22,7 +22,7 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Réseau d'abord pour la page (mises à jour rapides), cache en secours ; cache d'abord pour le reste.
+// Réseau d'abord pour la page et son script (mises à jour rapides, toujours assortis), cache en secours ; cache d'abord pour le reste.
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
@@ -34,6 +34,18 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE).then((c) => c.put('index.html', copy));
         return res;
       }).catch(() => caches.match('index.html').then((r) => r || caches.match('./')))
+    );
+    return;
+  }
+  if (new URL(req.url).pathname.endsWith('/app.js')) {
+    e.respondWith(
+      fetch(req, { cache: 'no-cache' }).then((res) => {
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(req, copy));
+        }
+        return res;
+      }).catch(() => caches.match(req))
     );
     return;
   }
