@@ -1,6 +1,6 @@
 // Service worker : l'appli fonctionne hors ligne.
 // Pour publier une mise à jour, change le numéro de VERSION.
-const VERSION = 'v5';
+const VERSION = 'v6';
 const CACHE = 'programme-12s-' + VERSION;
 const FILES = [
   './', 'index.html', 'app.js', 'manifest.webmanifest',
